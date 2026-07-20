@@ -2,16 +2,16 @@
 using SistemaInventario.Entidades;
 using System;
 using System.Text.RegularExpressions;
-using static SistemaInventario.AccesoDatos.DAL;
+using static SistemaInventario.AccesoDatos.NorthwindDbContext;
 
 namespace SistemaInventario.LogicaNegocios
 {
     public class BL
     {
-        private readonly DAL _dal;
+        private readonly NorthwindDbContext _dal;
         public BL()
         {
-            _dal = new DAL();
+            _dal = new NorthwindDbContext();
         }
 
         public List<Entidades.Categorias> ObtenerCategorias()
@@ -40,10 +40,10 @@ namespace SistemaInventario.LogicaNegocios
 
     public class ProductosBL
     {
-        private readonly DAL _dal;
+        private readonly NorthwindDbContext _dal;
         public ProductosBL()
         {
-            _dal = new DAL();
+            _dal = new NorthwindDbContext();
         }
 
         public List<Entidades.Productos> ObtenerProductos()
@@ -140,10 +140,10 @@ namespace SistemaInventario.LogicaNegocios
 
     public class SuplidoresBL
     {
-        private readonly DAL _dal;
+        private readonly NorthwindDbContext _dal;
         public SuplidoresBL()
         {
-            _dal = new DAL();
+            _dal = new NorthwindDbContext();
         }
 
         public List<Entidades.Suplidores> ObtenerSuplidores()
@@ -215,10 +215,10 @@ namespace SistemaInventario.LogicaNegocios
 
     public class PapeleraSuplidor
     {
-        private readonly DAL _dal;
+        private readonly NorthwindDbContext _dal;
         public PapeleraSuplidor()
         {
-            _dal = new DAL();
+            _dal = new NorthwindDbContext();
         }
         public List<Entidades.Suplidores> PapeleraSuplidores()
         {
@@ -229,10 +229,10 @@ namespace SistemaInventario.LogicaNegocios
 
     public class PapeleraCategoria
     {
-        private readonly DAL _dal;
+        private readonly NorthwindDbContext _dal;
         public PapeleraCategoria()
         {
-            _dal = new DAL();
+            _dal = new NorthwindDbContext();
         }
         public List<Entidades.Categorias> PapeleraCategorias()
         {
@@ -244,10 +244,10 @@ namespace SistemaInventario.LogicaNegocios
 
     public class PapeleraProducto
     {
-        private readonly DAL _dal;
+        private readonly NorthwindDbContext _dal;
         public PapeleraProducto()
         {
-            _dal = new DAL();
+            _dal = new NorthwindDbContext();
         }
         public List<Entidades.Productos> ProductosPapelera()
         {
