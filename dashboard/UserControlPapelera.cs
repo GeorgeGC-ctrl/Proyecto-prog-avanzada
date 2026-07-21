@@ -7,9 +7,7 @@ namespace SistemaInventario.Presentacion
 {
     public partial class UserControlPapelera : UserControl
     {
-        private readonly PapeleraCategoria pC = new PapeleraCategoria();
-        private readonly PapeleraProducto pP = new PapeleraProducto();
-        private readonly PapeleraSuplidor pS = new PapeleraSuplidor();
+        
 
         public UserControlPapelera()
         {
@@ -57,13 +55,7 @@ namespace SistemaInventario.Presentacion
         {
             string opcion = cboOpciones.SelectedItem.ToString();
 
-            dgvPapelera.DataSource = opcion switch
-            {
-                "Suplidores" => (object)pS.PapeleraSuplidores(),
-                "Categorías" => pC.PapeleraCategorias(),
-                "Productos" => pP.ProductosPapelera(),
-                _ => null
-            };
+           
         }
 
         private int ObtenerIdSeleccionado()
@@ -91,13 +83,7 @@ namespace SistemaInventario.Presentacion
 
                 if (confirmacion != DialogResult.Yes) return;
 
-                switch (opcion)
-                {
-                    case "Suplidores": pS.RestaurarSuplidor(id); break;
-                    case "Categorías": pC.RestaurarCategoria(id); break;
-                    case "Productos": pP.RestaurarProducto(id); break;
-                }
-
+               
                 MessageBox.Show("Registro restaurado correctamente.", "Éxito",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
 

@@ -15,7 +15,7 @@ namespace SistemaInventario.Presentacion
 {
     public partial class ucAgregarSuplidor : UserControl
     {
-        private readonly SuplidoresBL suplidoresBL = new SuplidoresBL();
+        
         public ucAgregarSuplidor()
         {
             InitializeComponent();
@@ -26,7 +26,7 @@ namespace SistemaInventario.Presentacion
             try
             {
                 Suplidores suplidores = ObtenerProductoDesdeFormulario();
-                suplidoresBL.RegistrarSuplidor(suplidores);
+                
                 MessageBox.Show("¡Suplidor guardado exitosamente!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)

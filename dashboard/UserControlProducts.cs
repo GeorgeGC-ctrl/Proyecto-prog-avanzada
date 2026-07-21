@@ -14,7 +14,7 @@ namespace SistemaInventario.Presentacion
 {
     public partial class UserControlProducts : UserControl
     {
-        ProductosBL productosBL = new ProductosBL();
+        
         public UserControlProducts()
         {
             InitializeComponent();
@@ -23,8 +23,7 @@ namespace SistemaInventario.Presentacion
 
         private void UserControlProducts_Load(object sender, EventArgs e)
         {
-            productosBL = new ProductosBL();
-            ProductosDgv.DataSource = productosBL.ObtenerProductos();
+           
 
             ProductosDgv.BorderStyle = BorderStyle.None;
             ProductosDgv.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
@@ -53,12 +52,7 @@ namespace SistemaInventario.Presentacion
 
         private void iconButton3_Paint(object sender, PaintEventArgs e)
         {
-            //Graphics g = e.Graphics;
-            //Pen pen = new Pen(Color.FromArgb(37, 99, 235), 2);
-            //Rectangle rect = new Rectangle(0, 0, iconButton3.Width - 1, iconButton3.Height - 1);
-            //int radius = 10;
-            //DrawRoundedRectangle(g, pen, rect, radius);
-            //BorderStyle = BorderStyle.None;
+            
         }
 
         private void ProductosDgv_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -68,7 +62,7 @@ namespace SistemaInventario.Presentacion
         public void RefrescarProductos()
         {
             ProductosDgv.DataSource = null;
-            ProductosDgv.DataSource = productosBL.ObtenerProductos();
+           
         }
 
         private void iconButton4_Click(object sender, EventArgs e)
@@ -99,7 +93,7 @@ namespace SistemaInventario.Presentacion
 
                 if (respuesta == DialogResult.Yes)
                 {
-                    productosBL.EliminarProduct(id);
+                   
 
                     MessageBox.Show(
                         "Suplidor eliminado correctamente.",

@@ -16,18 +16,16 @@ namespace SistemaInventario.Presentacion
     public partial class UserControlSuplidores : UserControl
 
     {
-        SuplidoresBL suplidoresBL;
+       
         public UserControlSuplidores()
         {
             InitializeComponent();
-            suplidoresBL = new SuplidoresBL();
+            
         }
 
         private void UserControlSuplidores_Load(object sender, EventArgs e)
-        {
-            
-            SuplidoresDgv.DataSource = suplidoresBL.ObtenerSuplidores();
-
+        {         
+           
             SuplidoresDgv.BorderStyle = BorderStyle.None;
             SuplidoresDgv.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             SuplidoresDgv.GridColor = Color.FromArgb(226, 232, 240); // #E2E8F0
@@ -59,7 +57,6 @@ namespace SistemaInventario.Presentacion
 
         private void iconButton4_Click(object sender, EventArgs e)
         {
-            SuplidoresDgv.DataSource = suplidoresBL.ObtenerSuplidores();
         }
 
         private void iconButton2_Click(object sender, EventArgs e)
@@ -76,8 +73,7 @@ namespace SistemaInventario.Presentacion
 
                 if (respuesta == DialogResult.Yes)
                 {
-                    suplidoresBL.EliminarProducto(id);
-
+                    
                     MessageBox.Show(
                         "Suplidor eliminado correctamente.",
                         "Éxito",
@@ -99,7 +95,7 @@ namespace SistemaInventario.Presentacion
         public void RefrescarProductos()
         {
             SuplidoresDgv.DataSource = null;
-            SuplidoresDgv.DataSource = suplidoresBL.ObtenerSuplidores();
+            
         }
         private int ObtenerIdSeleccionado()
         {

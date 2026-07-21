@@ -1,5 +1,7 @@
+using SistemaInventario.LogicaNegocios;
 using SistemaInventario.Presentacion;
 using System.Drawing.Drawing2D;
+using System.Threading.Tasks;
 
 namespace dashboard
 {
@@ -7,11 +9,12 @@ namespace dashboard
     {
 
         private bool isActive = false;
+        private readonly ICategoryService _categoriaService;
 
-
-        public Form1()
+        public Form1(ICategoryService categoryService)
         {
             InitializeComponent();
+            _categoriaService = categoryService;
 
         }
 
@@ -35,10 +38,11 @@ namespace dashboard
         {
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private async Task Form1_Load(object sender, EventArgs e)
         {
             var userControl = new ucDashboard();
             userControl.Show();
+            dataGridView1.DataSource =  _categoriaService.GetAllCategoriesAsync();
         }
 
         private void nav_Paint(object sender, PaintEventArgs e)
@@ -142,9 +146,6 @@ namespace dashboard
 
         private void btnProduct_Click(object sender, EventArgs e)
         {
-            Form4 form4 = new Form4();
-            form4.ShowDialog();
-
             conteinerPanel.Controls.Clear();
             var userControl = new UserControlProducts();
             userControl.Dock = DockStyle.Fill;
@@ -154,9 +155,9 @@ namespace dashboard
         private void btnCategories_Click(object sender, EventArgs e)
         {
             conteinerPanel.Controls.Clear();
-            var userControl = new UserControlCategories();
-            userControl.Dock = DockStyle.Fill;
-            conteinerPanel.Controls.Add(userControl);
+            var Categorias = new UserControlCategories();
+            Categorias.Dock = DockStyle.Fill;
+            conteinerPanel.Controls.Add(Categorias);
         }
 
         private void conteinerPanel_Paint(object sender, PaintEventArgs e)
@@ -170,9 +171,14 @@ namespace dashboard
         private void btnPapelera_Click(object sender, EventArgs e)
         {
             conteinerPanel.Controls.Clear();
-            var userControl= new UserControlPapelera();
+            var userControl = new UserControlPapelera();
             userControl.Dock = DockStyle.Fill;
             conteinerPanel.Controls.Add(userControl);
+        }
+
+        private async void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
         }
     }
 }

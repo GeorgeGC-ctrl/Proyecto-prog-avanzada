@@ -15,18 +15,13 @@ namespace SistemaInventario.Presentacion
 {
     public partial class AgregarProducto : UserControl
     {
-        private readonly ProductosBL _productosBL;
-        private readonly BL _bl;
-        private readonly SuplidoresBL _suplidoresBL;
+       
 
 
         public AgregarProducto()
         {
             InitializeComponent();
-            _productosBL = new ProductosBL();
-            _bl = new BL();
-            _suplidoresBL = new SuplidoresBL();
-            
+                       
         }
 
         private void iconButton3_Click(object sender, EventArgs e)
@@ -38,12 +33,12 @@ namespace SistemaInventario.Presentacion
                 if (_productoId.HasValue)
                 {
                     producto.Id = _productoId.Value;
-                    _productosBL.ActualizarProducto(producto);
+                   
                     MessageBox.Show("¡Producto actualizado exitosamente!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    _productosBL.RegistrarProducto(producto);
+                   
                     MessageBox.Show("¡Producto guardado exitosamente!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
@@ -69,11 +64,11 @@ namespace SistemaInventario.Presentacion
         }
         private void CargarCombos()
         {
-            cbCategoria.DataSource = _bl.ComboCategorias();
+           
             cbCategoria.DisplayMember = "Nombre";
             cbCategoria.ValueMember = "Id";
 
-            cbSuplidor.DataSource = _suplidoresBL.ComboSuplidores();
+            
             cbSuplidor.DisplayMember = "Empresa";
             cbSuplidor.ValueMember = "Id";
         }

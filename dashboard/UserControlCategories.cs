@@ -15,17 +15,18 @@ namespace dashboard
 {
     public partial class UserControlCategories : UserControl
     {
-        BL categories = new BL();
+       
 
         public UserControlCategories()
         {
             InitializeComponent();
-
+            this.Load += Categories_Load;
+            
         }
 
         private void Categories_Load(object sender, EventArgs e)
         {
-            CatDgv.DataSource = categories.ObtenerCategorias();
+           
 
             CatDgv.BorderStyle = BorderStyle.None;
             CatDgv.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
@@ -85,7 +86,7 @@ namespace dashboard
             try
             {
                 Categorias categorias = ObtenerProductoDesdeFormulario();
-                categories.RegistrarCategoria(categorias);
+               
 
                 MessageBox.Show("¡Categoria guardada exitosamente!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -113,7 +114,7 @@ namespace dashboard
 
         private void iconButton3_Click(object sender, EventArgs e)
         {
-            CatDgv.DataSource = categories.ObtenerCategorias();
+            
         }
 
         private void iconButton2_Click(object sender, EventArgs e)
@@ -130,7 +131,7 @@ namespace dashboard
 
                 if (respuesta == DialogResult.Yes)
                 {
-                    categories.EliminarCategoria(id);
+                    
 
                     MessageBox.Show(
                         "Suplidor eliminado correctamente.",
@@ -162,7 +163,7 @@ namespace dashboard
         public void RefrescarProductos()
         {
             CatDgv.DataSource = null;
-            CatDgv.DataSource = categories.ObtenerCategorias();
+           
         }
     }
 

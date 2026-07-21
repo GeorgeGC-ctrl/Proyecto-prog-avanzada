@@ -44,6 +44,7 @@ namespace dashboard
             System = new Label();
             panel2 = new Panel();
             conteinerPanel = new Panel();
+            dataGridView1 = new DataGridView();
             panelTopBar = new Panel();
             lbTituloPag = new Label();
             Sidebar.SuspendLayout();
@@ -51,6 +52,8 @@ namespace dashboard
             logo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)LogoIcon).BeginInit();
             panel2.SuspendLayout();
+            conteinerPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             panelTopBar.SuspendLayout();
             SuspendLayout();
             // 
@@ -261,12 +264,23 @@ namespace dashboard
             // 
             // conteinerPanel
             // 
+            conteinerPanel.Controls.Add(dataGridView1);
             conteinerPanel.Dock = DockStyle.Fill;
             conteinerPanel.Location = new Point(0, 56);
             conteinerPanel.Name = "conteinerPanel";
             conteinerPanel.Size = new Size(974, 847);
             conteinerPanel.TabIndex = 1;
             conteinerPanel.Paint += conteinerPanel_Paint;
+            // 
+            // dataGridView1
+            // 
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new Point(101, 350);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowHeadersWidth = 62;
+            dataGridView1.Size = new Size(445, 281);
+            dataGridView1.TabIndex = 0;
+            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
             // panelTopBar
             // 
@@ -304,7 +318,6 @@ namespace dashboard
             Name = "Form1";
             Text = "System";
             WindowState = FormWindowState.Maximized;
-            Load += Form1_Load;
             Sidebar.ResumeLayout(false);
             nav.ResumeLayout(false);
             nav.PerformLayout();
@@ -312,6 +325,8 @@ namespace dashboard
             logo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)LogoIcon).EndInit();
             panel2.ResumeLayout(false);
+            conteinerPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             panelTopBar.ResumeLayout(false);
             panelTopBar.PerformLayout();
             ResumeLayout(false);
@@ -335,5 +350,6 @@ namespace dashboard
         private Label lbTituloPag;
         private FontAwesome.Sharp.IconPictureBox LogoIcon;
         private Panel conteinerPanel;
+        private DataGridView dataGridView1;
     }
 }

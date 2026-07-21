@@ -13,12 +13,14 @@ namespace Northwind.AccesoDatos
 
             services.AddDbContext<NorthwindDbContext>(options =>
             {
-                options.UseSqlServer(configuration.GetConnectionString("NorthwindConnection"));
+                options.UseSqlServer(configuration.GetConnectionString("Northwind"));
 
             });
+            services.AddDbContext<NorthwindDbContext>(options =>
+    options.UseSqlServer(configuration.GetConnectionString("NorthwindConnection")));
 
 
-                return services;
+            return services;
         }
 
     }

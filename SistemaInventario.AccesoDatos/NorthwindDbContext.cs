@@ -1,4 +1,6 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using FluentAssertions.Common;
+using LiveChartsCore;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Win32;
@@ -12,8 +14,10 @@ namespace SistemaInventario.AccesoDatos
 {
     public class NorthwindDbContext: DbContext
     {
+
         public NorthwindDbContext(DbContextOptions<NorthwindDbContext> options) : base(options)
         {
+            
         }
        public  DbSet<Categorias> Categorias { get; set; }
         public DbSet<Suplidores> Suplidores { get; set; }
