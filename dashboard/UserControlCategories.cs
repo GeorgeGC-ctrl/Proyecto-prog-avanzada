@@ -218,14 +218,7 @@ namespace dashboard
 
         }
 
-        private void ConfigurarEstilosGrid()
-        {
-            // Aplicamos el estilo moderno y le definimos qué métodos ejecutar cuando se hace click en Editar o Eliminar
-            //DataGridViewStyleHelper.(CatDgv,
-            //    onEditar: (row) => EjecutarEditar(row),
-            //    onEliminar: (row) => EjecutarEliminar(row)
-            //);
-        }
+       
 
         // Lógica al presionar el lápiz (Editar)
         // Método que se ejecuta al presionar el lápiz (Editar)

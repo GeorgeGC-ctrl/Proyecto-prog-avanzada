@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Northwind.LogicaNegocios.Suplidores;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,12 +18,25 @@ namespace SistemaInventario.Presentacion
             InitializeComponent();
         }
 
+        // Constructor para agregar (sin ID)
+        public Form3(ISuppliersService suppliersService) : this()
+        {
+            _suppliersService = suppliersService;
+        }
+        // Constructor para editar (con ID)
+        public Form3(ISuppliersService suppliersService, int? suplidorId) : this()
+        {
+            _suppliersService = suppliersService;
+            _suplidorId = suplidorId;
+        }
+        private ISuppliersService? _suppliersService;
+        private int? _suplidorId;
         private void Form3_Load(object sender, EventArgs e)
         {
-            ucAgregarSuplidor agregarSuplidor = new ucAgregarSuplidor();
-            agregarSuplidor.Dock = DockStyle.Fill;
-            panel1.Controls.Add(agregarSuplidor);
-
+            this.Text = _suplidorId.HasValue ? "Editar Suplidor" : "Nuevo Suplidor";
+            // Inicializar el UC y pasarle las dependencias
+            ucAgregarSuplidor1.InitializeDependencies(_suppliersService!, _suplidorId);
         }
     }
 }
+

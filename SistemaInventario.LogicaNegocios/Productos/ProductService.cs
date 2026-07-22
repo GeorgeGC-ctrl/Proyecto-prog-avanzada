@@ -32,7 +32,6 @@ namespace Northwind.LogicaNegocios.Productos
                 CategoryID      = p.CategoryID,
                 CategoriaNombre = p.CategoryID != null && dictCategorias.TryGetValue(p.CategoryID.GetValueOrDefault(), out var cat) ? cat : "Sin categoría",
                 SuplidorNombre  = dictSuplidores.TryGetValue(p.SupplierID.GetValueOrDefault(), out var sup) ? sup : "Sin suplidor",
-                QuantityPerUnit = p.QuantityPerUnit,
                 UnitPrice       = p.UnitPrice,
                 UnitsInStock     = p.UnitsInStock,
                 UnitsOnOrder    = p.UnitsOnOrder,
@@ -53,7 +52,6 @@ namespace Northwind.LogicaNegocios.Productos
                 ProductName = product.ProductName,
                 SupplierID = product.SupplierID,
                 CategoryID = product.CategoryID,
-                QuantityPerUnit = product.QuantityPerUnit,
                 UnitPrice = product.UnitPrice,
                 UnitsInStock = product.UnitsInStock,
                 UnitsOnOrder = product.UnitsOnOrder,
@@ -74,7 +72,6 @@ namespace Northwind.LogicaNegocios.Productos
                 ProductName = createCategoryDto.ProductName,
                 SupplierID = createCategoryDto.SupplierID,
                 CategoryID = createCategoryDto.CategoryID,
-                QuantityPerUnit = createCategoryDto.QuantityPerUnit,
                 UnitPrice = createCategoryDto.UnitPrice,
                 UnitsInStock = createCategoryDto.UnitsInStock,
                 UnitsOnOrder = createCategoryDto.UnitsOnOrder,
@@ -90,7 +87,6 @@ namespace Northwind.LogicaNegocios.Productos
                 ProductName = newProduct.ProductName,
                 SupplierID = newProduct.SupplierID,
                 CategoryID = newProduct.CategoryID,
-                QuantityPerUnit = newProduct.QuantityPerUnit,
                 UnitPrice = newProduct.UnitPrice,
                 UnitsInStock = newProduct.UnitsInStock,
                 UnitsOnOrder = newProduct.UnitsOnOrder,
@@ -114,7 +110,6 @@ namespace Northwind.LogicaNegocios.Productos
             product.ProductName = updateProductDto.ProductName;
             product.SupplierID = updateProductDto.SupplierID;
             product.CategoryID = updateProductDto.CategoryID;
-            product.QuantityPerUnit = updateProductDto.QuantityPerUnit;
             product.UnitPrice = updateProductDto.UnitPrice;
             product.UnitsInStock = updateProductDto.UnitsInStock;
             product.UnitsOnOrder = updateProductDto.UnitsOnOrder;
@@ -130,7 +125,6 @@ namespace Northwind.LogicaNegocios.Productos
                 ProductName = product.ProductName,
                 SupplierID = product.SupplierID,
                 CategoryID = product.CategoryID,
-                QuantityPerUnit = product.QuantityPerUnit,
                 UnitPrice = product.UnitPrice,
                 UnitsInStock = product.UnitsInStock,
                 UnitsOnOrder = product.UnitsOnOrder,

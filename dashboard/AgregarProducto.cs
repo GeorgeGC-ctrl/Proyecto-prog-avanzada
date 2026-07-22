@@ -61,7 +61,7 @@ namespace SistemaInventario.Presentacion
                     Discontinued = checkBox1.Checked,
                     CategoryID = cbCategoria.SelectedValue != null ? (int?)cbCategoria.SelectedValue : null,
                     SupplierID = cbSuplidor.SelectedValue != null ? (int?)cbSuplidor.SelectedValue : null,
-                    QuantityPerUnit = "" // Opcional, según diseño
+                    
                 };
                 if (_productoDto == null)
                 {

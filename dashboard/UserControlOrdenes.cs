@@ -4,11 +4,11 @@ using System.Windows.Forms;
 
 namespace SistemaInventario.Presentacion
 {
-    public partial class UserControlPapelera : UserControl
+    public partial class UserControlOrdenes : UserControl
     {
         
 
-        public UserControlPapelera()
+        public UserControlOrdenes()
         {
             InitializeComponent();
             iconButton1.Click += iconButton1_Click;

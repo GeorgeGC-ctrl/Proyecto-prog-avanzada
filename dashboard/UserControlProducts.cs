@@ -21,7 +21,7 @@ namespace SistemaInventario.Presentacion
         private readonly IProductService _productService;
         private readonly ICategoryService _categoryService;
         private readonly ISuppliersService _suppliersService;
-        public UserControlProducts(IProductService productService, ICategoryService categoryService, ISuppliersService suppliersService)
+         public UserControlProducts(IProductService productService, ICategoryService categoryService, ISuppliersService suppliersService)
         {
             InitializeComponent();
             this._productService = productService;
@@ -31,10 +31,18 @@ namespace SistemaInventario.Presentacion
 
         private async void UserControlProducts_Load(object sender, EventArgs e)
         {
-            await RefrescarProductos();
+            // 1. Aplicamos el estilo al grid una sola vez
+            EstiloGrid.AplicarA(ProductosDgv, TemaGrid.Claro());
 
-            
+            // 2. Creamos el gestor de acciones una sola vez
+            var acciones = new GestorColumnaAcciones(ProductosDgv, TemaGrid.Claro());
+            acciones.Editar += (rowIndex) => EjecutarEditar(rowIndex);
+            acciones.Eliminar += (rowIndex) => EjecutarEliminar(rowIndex);
+
+            // 3. Cargamos los datos
+            await RefrescarProductos();
         }
+
         public async Task RefrescarProductos()
         {
             try
@@ -42,9 +50,18 @@ namespace SistemaInventario.Presentacion
                 var datos = await _productService.GetAllProductsAsync();
                 ProductosDgv.DataSource = null;
                 ProductosDgv.DataSource = datos.ToList();
+
                 // Ocultar columnas de ID
                 if (ProductosDgv.Columns["SupplierID"] != null) ProductosDgv.Columns["SupplierID"].Visible = false;
                 if (ProductosDgv.Columns["CategoryID"] != null) ProductosDgv.Columns["CategoryID"].Visible = false;
+                
+                // Ocultar la columna de cantidad por unidad (QuantityPerUnit)
+                if (ProductosDgv.Columns["QuantityPerUnit"] != null) ProductosDgv.Columns["QuantityPerUnit"].Visible = false;
+
+                // Ocultar la columna Checkbox de Discontinued
+                if (ProductosDgv.Columns["Discontinued"] != null)
+                    ProductosDgv.Columns["Discontinued"].Visible = false;
+
                 // Renombrar columnas para la UI
                 if (ProductosDgv.Columns["ProductName"] != null) ProductosDgv.Columns["ProductName"].HeaderText = "Producto";
                 if (ProductosDgv.Columns["CategoriaNombre"] != null) ProductosDgv.Columns["CategoriaNombre"].HeaderText = "Categoría";
@@ -52,18 +69,13 @@ namespace SistemaInventario.Presentacion
                 if (ProductosDgv.Columns["UnitPrice"] != null) ProductosDgv.Columns["UnitPrice"].HeaderText = "Precio";
                 if (ProductosDgv.Columns["UnitsInStock"] != null) ProductosDgv.Columns["UnitsInStock"].HeaderText = "En Stock";
 
-                if (ProductosDgv.Columns["Discontinued"] != null)
-                    ProductosDgv.Columns["Discontinued"].Visible = false;
                 // Renombrar la nueva columna de texto
                 if (ProductosDgv.Columns["Estado"] != null) ProductosDgv.Columns["Estado"].HeaderText = "Estado";
-
-                EstiloGrid.AplicarA(ProductosDgv, TemaGrid.Claro());
-                var acciones = new GestorColumnaAcciones(ProductosDgv, TemaGrid.Claro());
-
-                acciones.Editar += (rowIndex) => EjecutarEditar(rowIndex);
-                acciones.Eliminar += (rowIndex) => EjecutarEliminar(rowIndex);
-
-
+                if (ProductosDgv.Columns["UnitPrice"] != null)
+                {
+                    ProductosDgv.Columns["UnitPrice"].HeaderText = "Precio";
+                    ProductosDgv.Columns["UnitPrice"].DefaultCellStyle.Format = "C2";
+                }
             }
             catch (Exception ex)
             {

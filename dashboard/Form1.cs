@@ -105,7 +105,7 @@ namespace dashboard
         private void btnSuplidores_Click(object sender, EventArgs e)
         {
             conteinerPanel.Controls.Clear();
-            var userControl = new UserControlSuplidores();
+            var userControl = new UserControlSuplidores(_suppliersService);
             userControl.Dock = DockStyle.Fill;
             conteinerPanel.Controls.Add(userControl);
         }
@@ -179,7 +179,7 @@ namespace dashboard
         private void btnPapelera_Click(object sender, EventArgs e)
         {
             conteinerPanel.Controls.Clear();
-            var userControl = new UserControlPapelera();
+            var userControl = new UserControlOrdenes();
             userControl.Dock = DockStyle.Fill;
             conteinerPanel.Controls.Add(userControl);
         }

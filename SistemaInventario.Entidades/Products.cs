@@ -22,7 +22,6 @@ namespace SistemaInventario.Entidades
         public short? UnitsOnOrder { get; set; }
         public short? ReorderLevel { get; set; }
         public bool Discontinued { get; set; }
-        public string? QuantityPerUnit { get; set; }
         public string Estado => Discontinued ? "Descontinuado" : "Activo";
 
     }

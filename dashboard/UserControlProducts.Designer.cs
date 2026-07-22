@@ -30,8 +30,6 @@
         {
             panel1 = new Panel();
             iconButton3 = new FontAwesome.Sharp.IconButton();
-            btnEliminar = new FontAwesome.Sharp.IconButton();
-            iconButton1 = new FontAwesome.Sharp.IconButton();
             comboBox1 = new ComboBox();
             textBox1 = new TextBox();
             panel2 = new Panel();
@@ -45,8 +43,6 @@
             // 
             panel1.BackColor = Color.WhiteSmoke;
             panel1.Controls.Add(iconButton3);
-            panel1.Controls.Add(btnEliminar);
-            panel1.Controls.Add(iconButton1);
             panel1.Controls.Add(comboBox1);
             panel1.Controls.Add(textBox1);
             panel1.Dock = DockStyle.Top;
@@ -54,7 +50,6 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(1376, 82);
             panel1.TabIndex = 1;
-            
             // 
             // iconButton3
             // 
@@ -75,58 +70,14 @@
             iconButton3.TextImageRelation = TextImageRelation.ImageBeforeText;
             iconButton3.UseVisualStyleBackColor = false;
             iconButton3.Click += iconButton3_Click;
-           
-            // 
-            // btnEliminar
-            // 
-            btnEliminar.BackColor = Color.FromArgb(254, 242, 242);
-            btnEliminar.Cursor = Cursors.Hand;
-            btnEliminar.FlatAppearance.BorderColor = Color.FromArgb(239, 68, 68);
-            btnEliminar.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnEliminar.ForeColor = Color.FromArgb(239, 68, 68);
-            btnEliminar.IconChar = FontAwesome.Sharp.IconChar.TrashAlt;
-            btnEliminar.IconColor = Color.Black;
-            btnEliminar.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            btnEliminar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnEliminar.Location = new Point(939, 18);
-            btnEliminar.Name = "btnEliminar";
-            btnEliminar.Size = new Size(157, 54);
-            btnEliminar.TabIndex = 4;
-            btnEliminar.Text = "Eliminar";
-            btnEliminar.TextAlign = ContentAlignment.MiddleLeft;
-            btnEliminar.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnEliminar.UseVisualStyleBackColor = false;
-            btnEliminar.Click += btnEliminar_Click;
-            // 
-            // iconButton1
-            // 
-            iconButton1.BackColor = Color.White;
-            iconButton1.BackgroundImageLayout = ImageLayout.None;
-            iconButton1.Cursor = Cursors.Hand;
-            iconButton1.FlatAppearance.BorderColor = Color.FromArgb(226, 232, 240);
-            iconButton1.FlatStyle = FlatStyle.Flat;
-            iconButton1.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            iconButton1.IconChar = FontAwesome.Sharp.IconChar.Edit;
-            iconButton1.IconColor = Color.Black;
-            iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            iconButton1.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButton1.Location = new Point(579, 18);
-            iconButton1.Name = "iconButton1";
-            iconButton1.Size = new Size(157, 54);
-            iconButton1.TabIndex = 3;
-            iconButton1.Text = "Editar";
-            iconButton1.TextAlign = ContentAlignment.MiddleLeft;
-            iconButton1.TextImageRelation = TextImageRelation.ImageBeforeText;
-            iconButton1.UseVisualStyleBackColor = false;
-            
             // 
             // comboBox1
             // 
             comboBox1.FlatStyle = FlatStyle.Flat;
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(312, 18);
+            comboBox1.Location = new Point(391, 16);
             comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(182, 33);
+            comboBox1.Size = new Size(209, 33);
             comboBox1.TabIndex = 1;
             // 
             // textBox1
@@ -134,7 +85,7 @@
             textBox1.Location = new Point(45, 18);
             textBox1.Name = "textBox1";
             textBox1.PlaceholderText = "Buscar productos";
-            textBox1.Size = new Size(240, 31);
+            textBox1.Size = new Size(304, 31);
             textBox1.TabIndex = 0;
             // 
             // panel2
@@ -174,11 +125,9 @@
 
         #endregion
         private Panel panel1;
-        private FontAwesome.Sharp.IconButton iconButton1;
         private ComboBox comboBox1;
         private TextBox textBox1;
         private FontAwesome.Sharp.IconButton iconButton3;
-        private FontAwesome.Sharp.IconButton btnEliminar;
         private Panel panel2;
         private DataGridView ProductosDgv;
     }

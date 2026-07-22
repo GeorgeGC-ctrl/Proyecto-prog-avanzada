@@ -28,6 +28,7 @@ namespace dashboard
             services.AddTransient<UserControlCategories>();
             services.AddTransient<UserControlProducts>();
             services.AddTransient<UserControlSuplidores>();
+            services.AddTransient<ucAgregarSuplidor>();
 
 
             var serviceProvider = services.BuildServiceProvider();
