@@ -14,10 +14,16 @@ namespace dashboard
         public Form1(ICategoryService categoryService)
         {
             InitializeComponent();
-            _categoriaService = categoryService;
+            this._categoriaService = categoryService;
+            
 
         }
 
+        private async void Form1_Load1(object? sender, EventArgs e)
+        {
+            var userControl = new ucDashboard();
+            userControl.Show();
+        }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
@@ -40,9 +46,8 @@ namespace dashboard
 
         private async Task Form1_Load(object sender, EventArgs e)
         {
-            var userControl = new ucDashboard();
-            userControl.Show();
-            dataGridView1.DataSource =  _categoriaService.GetAllCategoriesAsync();
+            
+           
         }
 
         private void nav_Paint(object sender, PaintEventArgs e)
@@ -155,9 +160,10 @@ namespace dashboard
         private void btnCategories_Click(object sender, EventArgs e)
         {
             conteinerPanel.Controls.Clear();
-            var Categorias = new UserControlCategories();
+            var Categorias = new UserControlCategories(_categoriaService);
             Categorias.Dock = DockStyle.Fill;
             conteinerPanel.Controls.Add(Categorias);
+
         }
 
         private void conteinerPanel_Paint(object sender, PaintEventArgs e)

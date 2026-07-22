@@ -12,7 +12,7 @@ namespace SistemaInventario.AccesoDatos
         {
             this._context = context;
         }
-        public IRepository<Categorias> Categorias =>  new GenericRepository<Categorias>(_context);
+        public IRepository<Categories> Categorias =>  new GenericRepository<Categories>(_context);
         public IRepository<Suplidores> Suplidores => new GenericRepository<Suplidores>(_context);
         public IRepository<Productos> Productos => new GenericRepository<Productos>(_context);
      

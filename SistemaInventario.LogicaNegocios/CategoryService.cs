@@ -22,9 +22,9 @@ namespace SistemaInventario.LogicaNegocios
             var categories = await unitOfWork1.Categorias.GetAllAsync();
             return categories.Select (c => new CategoryDto
             {
-                Id = c.Id,
-                Nombre = c.Nombre,
-                Descripcion = c.Descripcion
+                Id = c.CategoryId,
+                Nombre = c.CategoryName,
+                Descripcion = c.Description
             }).ToList();
 
         }
@@ -37,9 +37,9 @@ namespace SistemaInventario.LogicaNegocios
             }
             return new CategoryDto
             {
-                Id = category.Id,
-                Nombre = category.Nombre,
-                Descripcion = category.Descripcion
+                Id = category.CategoryId,
+                Nombre = category.CategoryName,
+                Descripcion = category.Description
             };
         }
         public async Task<CategoryDto> CreateCategoryAsync(CreateCategoryDto createCategoryDto)
@@ -50,11 +50,11 @@ namespace SistemaInventario.LogicaNegocios
             {
                 throw new ValidationException(validationResult.Errors);
             }
-            var category = new Categorias
+            var category = new Categories
             {
-                Nombre = createCategoryDto.Nombre,
-                Descripcion = createCategoryDto.Descripcion,
-                Activo = true
+                CategoryName = createCategoryDto.Nombre,
+                Description = createCategoryDto.Descripcion,
+                
             };
            
             await unitOfWork1.Categorias.AddAsync(category);
@@ -62,9 +62,37 @@ namespace SistemaInventario.LogicaNegocios
 
             return new CategoryDto
             {
-                Id = category.Id,
-                Nombre = category.Nombre,
-                Descripcion = category.Descripcion
+                Id = category.CategoryId,
+                Nombre = category.CategoryName,
+                Descripcion = category.Description
+            };
+        }
+
+        public async Task<CategoryDto> UpdateCategoryAsync(int id, CreateCategoryDto updateCategoryDto)
+        {
+            var validationResult = _createCategoryValidator.Validate(updateCategoryDto);
+
+            if (!validationResult.IsValid)
+            {
+                throw new ValidationException(validationResult.Errors);
+            }
+
+            var category = await unitOfWork1.Categorias.GetByIdAsync(id);
+            if (category == null)
+            {
+                throw new Exception($"Categoría con ID {id} no encontrada.");
+            }
+
+            category.CategoryName = updateCategoryDto.Nombre;
+            category.Description = updateCategoryDto.Descripcion;
+
+            await unitOfWork1.Categorias.UpdateAsync(category); // Actualiza y guarda en DB
+
+            return new CategoryDto
+            {
+                Id = category.CategoryId,
+                Nombre = category.CategoryName,
+                Descripcion = category.Description
             };
         }
         public async Task DeleteCategoryAsync(int id)
@@ -79,4 +107,5 @@ namespace SistemaInventario.LogicaNegocios
             
         }
     }
+
 }

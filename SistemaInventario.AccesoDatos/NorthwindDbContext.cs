@@ -19,7 +19,7 @@ namespace SistemaInventario.AccesoDatos
         {
             
         }
-       public  DbSet<Categorias> Categorias { get; set; }
+       public  DbSet<Categories> Categorias { get; set; }
         public DbSet<Suplidores> Suplidores { get; set; }
         public DbSet<Productos> Productos { get; set; }
 

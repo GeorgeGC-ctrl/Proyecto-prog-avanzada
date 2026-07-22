@@ -126,6 +126,7 @@
             iconButton1.TextAlign = ContentAlignment.MiddleLeft;
             iconButton1.TextImageRelation = TextImageRelation.ImageBeforeText;
             iconButton1.UseVisualStyleBackColor = false;
+            iconButton1.Click += iconButton1_Click_1;
             // 
             // iconButton2
             // 
@@ -156,6 +157,7 @@
             textBox1.PlaceholderText = "Buscar categoria";
             textBox1.Size = new Size(339, 31);
             textBox1.TabIndex = 0;
+            textBox1.TextChanged += textBox1_TextChanged;
             // 
             // panel2
             // 

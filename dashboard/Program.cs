@@ -1,6 +1,8 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Northwind.LogicaNegocios;
+using Northwind.UI;
+using SistemaInventario.Presentacion;
 
 namespace dashboard
 {
@@ -23,7 +25,11 @@ namespace dashboard
             services.AddBusinessLogic(configuration);
 
             services.AddTransient<Form1>();
-            
+            services.AddTransient<UserControlCategories>();
+            services.AddTransient<UserControlProducts>();
+            services.AddTransient<UserControlSuplidores>();
+
+
             var serviceProvider = services.BuildServiceProvider();
 
 
@@ -33,6 +39,9 @@ namespace dashboard
             ApplicationConfiguration.Initialize();
 
             var mainForm = serviceProvider.GetRequiredService<Form1>();
+            var userControlCategories = serviceProvider.GetRequiredService<UserControlCategories>();
+            var userControlProducts = serviceProvider.GetRequiredService<UserControlProducts>();
+            var userControlSuplidores = serviceProvider.GetRequiredService<UserControlSuplidores>();
 
             Application.Run(mainForm);
         }

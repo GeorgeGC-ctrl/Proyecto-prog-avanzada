@@ -5,7 +5,7 @@ namespace SistemaInventario.AccesoDatos
 {
     public interface IUnitOfWork : IDisposable
     {
-        IRepository<Categorias> Categorias { get; }
+        IRepository<Categories> Categorias { get; }
         IRepository<Suplidores> Suplidores { get; }
         IRepository<Productos> Productos { get; }
         Task<int> SaveChangesAsync();

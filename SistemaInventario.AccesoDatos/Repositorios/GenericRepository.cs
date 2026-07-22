@@ -6,6 +6,8 @@ namespace SistemaInventario.AccesoDatos.Repositorios
     {
         private readonly NorthwindDbContext _context;
         private readonly DbSet<T> _dbSet;
+      
+
         public GenericRepository(NorthwindDbContext context)
         {
             _context = context;

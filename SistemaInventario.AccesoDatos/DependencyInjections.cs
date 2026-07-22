@@ -9,15 +9,13 @@ namespace Northwind.AccesoDatos
     {
         public static IServiceCollection AddDataAccess(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
 
             services.AddDbContext<NorthwindDbContext>(options =>
             {
                 options.UseSqlServer(configuration.GetConnectionString("Northwind"));
 
-            });
-            services.AddDbContext<NorthwindDbContext>(options =>
-    options.UseSqlServer(configuration.GetConnectionString("NorthwindConnection")));
+            },ServiceLifetime.Transient);
 
 
             return services;

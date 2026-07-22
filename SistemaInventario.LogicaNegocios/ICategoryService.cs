@@ -8,7 +8,7 @@ namespace SistemaInventario.LogicaNegocios
 
         Task<CategoryDto> GetCategoryByIdAsync(int id);
         Task<CategoryDto> CreateCategoryAsync(CreateCategoryDto createCategoryDto);
-        //Task<CategoryDto> UpdateCategoryAsync(int id, CreateCategoryDto updateCategoryDto);
+        Task<CategoryDto> UpdateCategoryAsync(int id, CreateCategoryDto updateCategoryDto);
         Task DeleteCategoryAsync(int id);
 
     }
