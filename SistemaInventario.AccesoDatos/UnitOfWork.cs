@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.EntityFrameworkCore.Storage;
 using SistemaInventario.AccesoDatos.Repositorios;
 using SistemaInventario.Entidades;
 
@@ -15,6 +15,8 @@ namespace SistemaInventario.AccesoDatos
         public IRepository<Categories> Categorias =>  new GenericRepository<Categories>(_context);
         public IRepository<Suppliers> Suplidores => new GenericRepository<Suppliers>(_context);
         public IRepository<Products> Productos => new GenericRepository<Products>(_context);
+        public IRepository<Orders> Ordenes => new GenericRepository<Orders>(_context);
+        public IRepository<OrderDetails> DetallesOrdenes => new GenericRepository<OrderDetails>(_context);
      
         public async Task BeginTransaction()
         {

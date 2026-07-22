@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace SistemaInventario.AccesoDatos.Repositorios
 {
@@ -39,6 +39,11 @@ namespace SistemaInventario.AccesoDatos.Repositorios
                  _dbSet.Remove(entity);
                 await _context.SaveChangesAsync();
             }
+        }
+        public async Task DeleteEntityAsync(T entity)
+        {
+            _dbSet.Remove(entity);
+            await _context.SaveChangesAsync();
         }
     }
 }

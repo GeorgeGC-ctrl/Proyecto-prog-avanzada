@@ -1,4 +1,4 @@
-﻿using SistemaInventario.AccesoDatos.Repositorios;
+using SistemaInventario.AccesoDatos.Repositorios;
 using SistemaInventario.Entidades;
 
 namespace SistemaInventario.AccesoDatos
@@ -8,6 +8,8 @@ namespace SistemaInventario.AccesoDatos
         IRepository<Categories> Categorias { get; }
         IRepository<Suppliers> Suplidores { get; }
         IRepository<Products> Productos { get; }
+        IRepository<Orders> Ordenes { get; }
+        IRepository<OrderDetails> DetallesOrdenes { get; }
         Task<int> SaveChangesAsync();
 
         Task BeginTransaction();

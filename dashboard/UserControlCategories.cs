@@ -1,5 +1,6 @@
 using Northwind.Entidades.DTOs;
 using Northwind.LogicaNegocios.Categorias;
+using Northwind.LogicaNegocios.Productos;
 using Northwind.UI.DatagridViewStyle;
 using SistemaInventario.Entidades;
 using System;
@@ -21,11 +22,22 @@ namespace dashboard
         private int? _selectedCategoryId = null;
         private List<CategoryDto> _allCategories = new List<CategoryDto>();
         private readonly ICategoryService _categoryService;
+        private readonly IProductService? _productService;
+        private readonly ErrorProvider _errorProvider = new();
 
-        public UserControlCategories(ICategoryService categoryService)
+        public UserControlCategories(ICategoryService categoryService) : this(categoryService, null)
+        {
+        }
+
+        public UserControlCategories(ICategoryService categoryService, IProductService? productService)
         {
             InitializeComponent();
             this._categoryService = categoryService;
+            this._productService = productService;
+
+            // Subscripción a los cambios de texto para actualizar dinámicamente la UI
+            txtNombre.TextChanged += TxtNombre_TextChanged;
+            txtDescripcion.TextChanged += TxtDescripcion_TextChanged;
         }
        
         private async void Categories_Load(object sender, EventArgs e)
@@ -40,7 +52,8 @@ namespace dashboard
             // 4. Cargamos los datos desde la base de datos (una sola vez)
             await RefrescarCategorias();
 
-           
+            // Configurar el formulario en modo "Nueva Categoría" al inicio
+            LimpiarFormulario();
         }
 
         private async Task RefrescarCategorias()
@@ -101,9 +114,11 @@ namespace dashboard
         {
             try
             {
+                _errorProvider.Clear();
+
                 if (string.IsNullOrWhiteSpace(txtNombre.Text))
                 {
-                    MessageBox.Show("El nombre de la categoría es obligatorio.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    _errorProvider.SetError(txtNombre, "El nombre de la categoría es obligatorio.");
                     return;
                 }
                 var dto = new CreateCategoryDto
@@ -128,8 +143,21 @@ namespace dashboard
             }
             catch (FluentValidation.ValidationException valEx)
             {
-                var errors = string.Join("\n", valEx.Errors.Select(err => err.ErrorMessage));
-                MessageBox.Show(errors, "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                foreach (var error in valEx.Errors)
+                {
+                    if (error.PropertyName.Contains("Nombre"))
+                    {
+                        _errorProvider.SetError(txtNombre, error.ErrorMessage);
+                    }
+                    else if (error.PropertyName.Contains("Descripcion"))
+                    {
+                        _errorProvider.SetError(txtDescripcion, error.ErrorMessage);
+                    }
+                    else
+                    {
+                        MessageBox.Show(error.ErrorMessage, "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -179,19 +207,21 @@ namespace dashboard
             txtDescripcion.Text = "";
             _selectedCategoryId = null;
             iconButton5.Text = "Guardar";
+            _errorProvider.Clear();
+            ActualizarTitulo();
         }
 
         private void iconButton1_Click_1(object sender, EventArgs e)
         {
-
             if (CatDgv.SelectedRows.Count > 0)
             {
                 var category = (CategoryDto)CatDgv.SelectedRows[0].DataBoundItem;
-
                 _selectedCategoryId = category.Id;
                 txtNombre.Text = category.Nombre;
                 txtDescripcion.Text = category.Descripcion;
-                iconButton5.Text = "Actualizar"; // Cambiar texto del botón de guardar
+                iconButton5.Text = "Actualizar"; 
+                ActualizarTitulo();
+                _ = ActualizarProductosAsociados(category.Id);
             }
             else
             {
@@ -214,26 +244,74 @@ namespace dashboard
                     .ToList();
                 CatDgv.DataSource = filtered;
             }
-
-
         }
 
-       
+        private void TxtNombre_TextChanged(object? sender, EventArgs e)
+        {
+            ActualizarTitulo();
+        }
 
-        // Lógica al presionar el lápiz (Editar)
+        private void TxtDescripcion_TextChanged(object? sender, EventArgs e)
+        {
+            lblCharCount.Text = $"{txtDescripcion.Text.Length}/200";
+        }
+
+        private void ActualizarTitulo()
+        {
+            if (_selectedCategoryId == null)
+            {
+                label1.Text = "Nueva categoría";
+                panelProductosAsociados.Visible = false;
+            }
+            else
+            {
+                label1.Text = $"Editando: {txtNombre.Text}";
+                panelProductosAsociados.Visible = true;
+            }
+        }
+
+        private async Task ActualizarProductosAsociados(int categoryId)
+        {
+            if (_productService != null)
+            {
+                try
+                {
+                    var productos = await _productService.GetAllProductsAsync();
+                    int count = productos.Count(p => p.CategoryID == categoryId);
+                    lblProdAsocBadge.Text = $"{count} productos";
+                }
+                catch
+                {
+                    lblProdAsocBadge.Text = "0 productos";
+                }
+            }
+            else
+            {
+                lblProdAsocBadge.Text = "0 productos";
+            }
+        }
+
+        private void btnNuevaCategoria_Click(object sender, EventArgs e)
+        {
+            LimpiarFormulario();
+            txtNombre.Focus();
+        }
+
         // Método que se ejecuta al presionar el lápiz (Editar)
         private void EjecutarEditar(int rowIndex)
         {
             if (rowIndex >= 0 && rowIndex < CatDgv.Rows.Count)
             {
-                // Obtenemos la categoría asociada a esa fila
                 var category = (CategoryDto)CatDgv.Rows[rowIndex].DataBoundItem;
                 _selectedCategoryId = category.Id;
                 txtNombre.Text = category.Nombre;
                 txtDescripcion.Text = category.Descripcion;
-                iconButton5.Text = "Actualizar"; // Cambia el botón de guardar a Actualizar
+                iconButton5.Text = "Actualizar"; 
+                ActualizarTitulo();
+                _ = ActualizarProductosAsociados(category.Id);
             }
         }
+
         // Método que se ejecuta al presionar la papelera (Eliminar)
         private async void EjecutarEliminar(int rowIndex)
         {

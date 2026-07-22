@@ -1,6 +1,7 @@
 using Northwind.LogicaNegocios.Categorias;
 using Northwind.LogicaNegocios.Productos;
 using Northwind.LogicaNegocios.Suplidores;
+using Northwind.LogicaNegocios.Ordenes;
 using SistemaInventario.Presentacion;
 using System.Drawing.Drawing2D;
 using System.Threading.Tasks;
@@ -13,13 +14,16 @@ namespace dashboard
         private readonly ICategoryService _categoriaService;
         private readonly IProductService _productService;
         private readonly ISuppliersService _suppliersService; // Nuevo campo
+        private readonly IOrderService _orderService;
+
         // Constructor modificado
-        public Form1(ICategoryService categoryService, IProductService productService, ISuppliersService suppliersService)
+        public Form1(ICategoryService categoryService, IProductService productService, ISuppliersService suppliersService, IOrderService orderService)
         {
             InitializeComponent();
             this._categoriaService = categoryService;
             this._productService = productService;
             this._suppliersService = suppliersService; // Guardar instancia
+            this._orderService = orderService;
         }
 
         private async void Form1_Load1(object? sender, EventArgs e)
@@ -165,7 +169,7 @@ namespace dashboard
         private void btnCategories_Click(object sender, EventArgs e)
         {
             conteinerPanel.Controls.Clear();
-            var Categorias = new UserControlCategories(_categoriaService);
+            var Categorias = new UserControlCategories(_categoriaService, _productService);
             Categorias.Dock = DockStyle.Fill;
             conteinerPanel.Controls.Add(Categorias);
 
@@ -179,7 +183,7 @@ namespace dashboard
         private void btnPapelera_Click(object sender, EventArgs e)
         {
             conteinerPanel.Controls.Clear();
-            var userControl = new UserControlOrdenes();
+            var userControl = new UserControlGestionOrdenes(_orderService, _productService);
             userControl.Dock = DockStyle.Fill;
             conteinerPanel.Controls.Add(userControl);
         }

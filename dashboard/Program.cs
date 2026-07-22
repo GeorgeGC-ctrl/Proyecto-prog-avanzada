@@ -29,6 +29,9 @@ namespace dashboard
             services.AddTransient<UserControlProducts>();
             services.AddTransient<UserControlSuplidores>();
             services.AddTransient<ucAgregarSuplidor>();
+            services.AddTransient<UserControlGestionOrdenes>();
+            services.AddTransient<ucAgregarOrden>();
+            services.AddTransient<FormOrder>();
 
 
             var serviceProvider = services.BuildServiceProvider();

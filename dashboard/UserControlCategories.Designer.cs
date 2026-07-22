@@ -1,4 +1,4 @@
-﻿namespace dashboard
+namespace dashboard
 {
     partial class UserControlCategories
     {
@@ -30,16 +30,18 @@
         {
             CatDgv = new DataGridView();
             panel1 = new Panel();
-            iconButton3 = new FontAwesome.Sharp.IconButton();
-            iconButton1 = new FontAwesome.Sharp.IconButton();
-            iconButton2 = new FontAwesome.Sharp.IconButton();
             textBox1 = new TextBox();
+            btnNuevaCategoria = new FontAwesome.Sharp.IconButton();
             panel2 = new Panel();
             panel3 = new Panel();
             panel4 = new Panel();
             iconButton5 = new FontAwesome.Sharp.IconButton();
             iconButton4 = new FontAwesome.Sharp.IconButton();
             panel6 = new Panel();
+            panelProductosAsociados = new Panel();
+            lblProdAsocTexto = new Label();
+            lblProdAsocBadge = new Label();
+            lblCharCount = new Label();
             txtDescripcion = new TextBox();
             label4 = new Label();
             txtNombre = new TextBox();
@@ -54,6 +56,7 @@
             panel3.SuspendLayout();
             panel4.SuspendLayout();
             panel6.SuspendLayout();
+            panelProductosAsociados.SuspendLayout();
             panel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)iconPictureBox1).BeginInit();
             SuspendLayout();
@@ -73,82 +76,13 @@
             // 
             // panel1
             // 
-            panel1.Controls.Add(iconButton3);
-            panel1.Controls.Add(iconButton1);
-            panel1.Controls.Add(iconButton2);
             panel1.Controls.Add(textBox1);
+            panel1.Controls.Add(btnNuevaCategoria);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
             panel1.Size = new Size(1459, 76);
             panel1.TabIndex = 2;
-            // 
-            // iconButton3
-            // 
-            iconButton3.BackColor = Color.White;
-            iconButton3.BackgroundImageLayout = ImageLayout.None;
-            iconButton3.Cursor = Cursors.Hand;
-            iconButton3.FlatAppearance.BorderColor = Color.FromArgb(226, 232, 240);
-            iconButton3.FlatStyle = FlatStyle.Flat;
-            iconButton3.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            iconButton3.IconChar = FontAwesome.Sharp.IconChar.Refresh;
-            iconButton3.IconColor = Color.Black;
-            iconButton3.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            iconButton3.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButton3.Location = new Point(916, 6);
-            iconButton3.Name = "iconButton3";
-            iconButton3.Size = new Size(157, 54);
-            iconButton3.TabIndex = 9;
-            iconButton3.Text = "Actualizar";
-            iconButton3.TextAlign = ContentAlignment.MiddleLeft;
-            iconButton3.TextImageRelation = TextImageRelation.ImageBeforeText;
-            iconButton3.UseVisualStyleBackColor = false;
-            iconButton3.Click += iconButton3_Click;
-            // 
-            // iconButton1
-            // 
-            iconButton1.BackColor = Color.White;
-            iconButton1.BackgroundImageLayout = ImageLayout.None;
-            iconButton1.Cursor = Cursors.Hand;
-            iconButton1.FlatAppearance.BorderColor = Color.FromArgb(226, 232, 240);
-            iconButton1.FlatStyle = FlatStyle.Flat;
-            iconButton1.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            iconButton1.IconChar = FontAwesome.Sharp.IconChar.Edit;
-            iconButton1.IconColor = Color.Black;
-            iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            iconButton1.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButton1.Location = new Point(439, 11);
-            iconButton1.Name = "iconButton1";
-            iconButton1.Padding = new Padding(5, 0, 10, 0);
-            iconButton1.Size = new Size(157, 54);
-            iconButton1.TabIndex = 8;
-            iconButton1.Text = "Editar";
-            iconButton1.TextAlign = ContentAlignment.MiddleLeft;
-            iconButton1.TextImageRelation = TextImageRelation.ImageBeforeText;
-            iconButton1.UseVisualStyleBackColor = false;
-            iconButton1.Click += iconButton1_Click_1;
-            // 
-            // iconButton2
-            // 
-            iconButton2.BackColor = Color.FromArgb(254, 242, 242);
-            iconButton2.Cursor = Cursors.Hand;
-            iconButton2.FlatAppearance.BorderColor = Color.FromArgb(239, 68, 68);
-            iconButton2.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            iconButton2.ForeColor = Color.FromArgb(239, 68, 68);
-            iconButton2.IconChar = FontAwesome.Sharp.IconChar.TrashAlt;
-            iconButton2.IconColor = Color.Black;
-            iconButton2.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            iconButton2.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButton2.Location = new Point(651, 6);
-            iconButton2.Name = "iconButton2";
-            iconButton2.Padding = new Padding(5, 0, 10, 0);
-            iconButton2.Size = new Size(160, 65);
-            iconButton2.TabIndex = 7;
-            iconButton2.Text = "Eliminar";
-            iconButton2.TextAlign = ContentAlignment.MiddleLeft;
-            iconButton2.TextImageRelation = TextImageRelation.ImageBeforeText;
-            iconButton2.UseVisualStyleBackColor = false;
-            iconButton2.Click += iconButton2_Click;
             // 
             // textBox1
             // 
@@ -158,6 +92,28 @@
             textBox1.Size = new Size(339, 31);
             textBox1.TabIndex = 0;
             textBox1.TextChanged += textBox1_TextChanged;
+            // 
+            // btnNuevaCategoria
+            // 
+            btnNuevaCategoria.BackColor = Color.FromArgb(99, 102, 241);
+            btnNuevaCategoria.FlatAppearance.BorderSize = 0;
+            btnNuevaCategoria.FlatStyle = FlatStyle.Flat;
+            btnNuevaCategoria.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
+            btnNuevaCategoria.ForeColor = Color.White;
+            btnNuevaCategoria.IconChar = FontAwesome.Sharp.IconChar.Add;
+            btnNuevaCategoria.IconColor = Color.White;
+            btnNuevaCategoria.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnNuevaCategoria.IconSize = 20;
+            btnNuevaCategoria.ImageAlign = ContentAlignment.MiddleLeft;
+            btnNuevaCategoria.Location = new Point(650, 15);
+            btnNuevaCategoria.Name = "btnNuevaCategoria";
+            btnNuevaCategoria.Size = new Size(210, 46);
+            btnNuevaCategoria.TabIndex = 1;
+            btnNuevaCategoria.Text = "Nueva Categoría";
+            btnNuevaCategoria.TextAlign = ContentAlignment.MiddleLeft;
+            btnNuevaCategoria.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnNuevaCategoria.UseVisualStyleBackColor = false;
+            btnNuevaCategoria.Click += btnNuevaCategoria_Click;
             // 
             // panel2
             // 
@@ -202,10 +158,10 @@
             iconButton5.IconColor = Color.Black;
             iconButton5.IconFont = FontAwesome.Sharp.IconFont.Auto;
             iconButton5.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButton5.Location = new Point(305, 441);
+            iconButton5.Location = new Point(323, 456);
             iconButton5.Name = "iconButton5";
             iconButton5.Padding = new Padding(5, 0, 10, 0);
-            iconButton5.Size = new Size(222, 82);
+            iconButton5.Size = new Size(155, 52);
             iconButton5.TabIndex = 8;
             iconButton5.Text = "Guardar";
             iconButton5.TextAlign = ContentAlignment.MiddleLeft;
@@ -224,9 +180,9 @@
             iconButton4.IconColor = Color.Black;
             iconButton4.IconFont = FontAwesome.Sharp.IconFont.Auto;
             iconButton4.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButton4.Location = new Point(24, 443);
+            iconButton4.Location = new Point(125, 456);
             iconButton4.Name = "iconButton4";
-            iconButton4.Size = new Size(216, 77);
+            iconButton4.Size = new Size(161, 52);
             iconButton4.TabIndex = 7;
             iconButton4.Text = "Cancelar";
             iconButton4.TextAlign = ContentAlignment.MiddleLeft;
@@ -237,6 +193,8 @@
             // panel6
             // 
             panel6.BackColor = Color.White;
+            panel6.Controls.Add(panelProductosAsociados);
+            panel6.Controls.Add(lblCharCount);
             panel6.Controls.Add(txtDescripcion);
             panel6.Controls.Add(label4);
             panel6.Controls.Add(txtNombre);
@@ -248,22 +206,68 @@
             panel6.Size = new Size(644, 357);
             panel6.TabIndex = 1;
             // 
+            // panelProductosAsociados
+            // 
+            panelProductosAsociados.BackColor = Color.FromArgb(243, 244, 246);
+            panelProductosAsociados.Controls.Add(lblProdAsocTexto);
+            panelProductosAsociados.Controls.Add(lblProdAsocBadge);
+            panelProductosAsociados.Location = new Point(3, 30);
+            panelProductosAsociados.Name = "panelProductosAsociados";
+            panelProductosAsociados.Size = new Size(503, 40);
+            panelProductosAsociados.TabIndex = 10;
+            // 
+            // lblProdAsocTexto
+            // 
+            lblProdAsocTexto.AutoSize = true;
+            lblProdAsocTexto.Font = new Font("Segoe UI Semibold", 8F);
+            lblProdAsocTexto.ForeColor = SystemColors.ControlDarkDark;
+            lblProdAsocTexto.Location = new Point(10, 10);
+            lblProdAsocTexto.Name = "lblProdAsocTexto";
+            lblProdAsocTexto.Size = new Size(161, 21);
+            lblProdAsocTexto.TabIndex = 0;
+            lblProdAsocTexto.Text = "Productos asociados";
+            // 
+            // lblProdAsocBadge
+            // 
+            lblProdAsocBadge.AutoSize = true;
+            lblProdAsocBadge.BackColor = Color.FromArgb(238, 242, 255);
+            lblProdAsocBadge.Font = new Font("Segoe UI", 8F, FontStyle.Bold);
+            lblProdAsocBadge.ForeColor = Color.FromArgb(99, 102, 241);
+            lblProdAsocBadge.Location = new Point(350, 8);
+            lblProdAsocBadge.Name = "lblProdAsocBadge";
+            lblProdAsocBadge.Size = new Size(100, 21);
+            lblProdAsocBadge.TabIndex = 1;
+            lblProdAsocBadge.Text = "0 productos";
+            lblProdAsocBadge.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // lblCharCount
+            // 
+            lblCharCount.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            lblCharCount.AutoSize = true;
+            lblCharCount.Font = new Font("Segoe UI", 7.5F);
+            lblCharCount.ForeColor = SystemColors.ControlDark;
+            lblCharCount.Location = new Point(450, 275);
+            lblCharCount.Name = "lblCharCount";
+            lblCharCount.Size = new Size(47, 20);
+            lblCharCount.TabIndex = 11;
+            lblCharCount.Text = "0/200";
+            // 
             // txtDescripcion
             // 
             txtDescripcion.BorderStyle = BorderStyle.FixedSingle;
-            txtDescripcion.Location = new Point(3, 153);
+            txtDescripcion.Location = new Point(3, 185);
             txtDescripcion.Multiline = true;
             txtDescripcion.Name = "txtDescripcion";
-            txtDescripcion.Size = new Size(503, 154);
+            txtDescripcion.Size = new Size(503, 120);
             txtDescripcion.TabIndex = 9;
             // 
             // label4
             // 
             label4.AutoSize = true;
             label4.BackColor = Color.Transparent;
-            label4.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label4.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold);
             label4.ForeColor = SystemColors.ControlDarkDark;
-            label4.Location = new Point(3, 117);
+            label4.Location = new Point(3, 160);
             label4.Name = "label4";
             label4.Size = new Size(96, 21);
             label4.TabIndex = 8;
@@ -272,7 +276,7 @@
             // txtNombre
             // 
             txtNombre.BorderStyle = BorderStyle.FixedSingle;
-            txtNombre.Location = new Point(3, 69);
+            txtNombre.Location = new Point(3, 110);
             txtNombre.Name = "txtNombre";
             txtNombre.Size = new Size(432, 31);
             txtNombre.TabIndex = 7;
@@ -281,9 +285,9 @@
             // 
             label3.AutoSize = true;
             label3.BackColor = Color.Transparent;
-            label3.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label3.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold);
             label3.ForeColor = SystemColors.ControlDarkDark;
-            label3.Location = new Point(3, 35);
+            label3.Location = new Point(3, 85);
             label3.Name = "label3";
             label3.Size = new Size(71, 21);
             label3.TabIndex = 6;
@@ -293,10 +297,9 @@
             // 
             label2.AutoSize = true;
             label2.BackColor = Color.Transparent;
-            label2.Dock = DockStyle.Top;
-            label2.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold);
             label2.ForeColor = SystemColors.ControlDark;
-            label2.Location = new Point(0, 0);
+            label2.Location = new Point(3, 5);
             label2.Name = "label2";
             label2.Size = new Size(148, 21);
             label2.TabIndex = 5;
@@ -357,6 +360,8 @@
             panel4.ResumeLayout(false);
             panel6.ResumeLayout(false);
             panel6.PerformLayout();
+            panelProductosAsociados.ResumeLayout(false);
+            panelProductosAsociados.PerformLayout();
             panel7.ResumeLayout(false);
             panel7.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)iconPictureBox1).EndInit();
@@ -367,13 +372,16 @@
         private DataGridView CatDgv;
         private Panel panel1;
         private TextBox textBox1;
-        private FontAwesome.Sharp.IconButton iconButton2;
-        private FontAwesome.Sharp.IconButton iconButton1;
+        private FontAwesome.Sharp.IconButton btnNuevaCategoria;
         private Panel panel2;
         private Panel panel3;
         private Panel panel4;
         private FontAwesome.Sharp.IconButton iconButton4;
         private Panel panel6;
+        private Panel panelProductosAsociados;
+        private Label lblProdAsocTexto;
+        private Label lblProdAsocBadge;
+        private Label lblCharCount;
         private TextBox txtDescripcion;
         private Label label4;
         private TextBox txtNombre;
@@ -383,6 +391,5 @@
         private Label label1;
         private FontAwesome.Sharp.IconPictureBox iconPictureBox1;
         private FontAwesome.Sharp.IconButton iconButton5;
-        private FontAwesome.Sharp.IconButton iconButton3;
     }
 }

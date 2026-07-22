@@ -1,4 +1,4 @@
-﻿using FluentAssertions.Common;
+using FluentAssertions.Common;
 using LiveChartsCore;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
@@ -19,10 +19,20 @@ namespace SistemaInventario.AccesoDatos
         {
             
         }
-       public  DbSet<Categories> Categorias { get; set; }
+        public  DbSet<Categories> Categorias { get; set; }
         public DbSet<Suppliers> Suplidores { get; set; }
         public DbSet<Products> Productos { get; set; }
+        public DbSet<Orders> Ordenes { get; set; }
+        public DbSet<OrderDetails> DetallesOrdenes { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            // Order Details tiene clave compuesta (OrderID + ProductID)
+            modelBuilder.Entity<OrderDetails>()
+                .HasKey(od => new { od.OrderID, od.ProductID });
+        }
     }
      
 }       

@@ -1,4 +1,4 @@
-﻿using Microsoft.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using Northwind.Entities.DTOs;
 using Northwind.LogicaNegocios.Categorias;
 using Northwind.LogicaNegocios.Productos;
@@ -22,6 +22,7 @@ namespace SistemaInventario.Presentacion
         private ICategoryService _categoryService;
         private ISuppliersService _suppliersService;
         private ProductsDto _productoDto;
+        private readonly ErrorProvider _errorProvider = new();
         // 1. CONSTRUCTOR VACÍO (Requerido para que funcione el Diseñador Visual)
         public AgregarProducto()
         {
@@ -45,11 +46,61 @@ namespace SistemaInventario.Presentacion
         {
             try
             {
+                _errorProvider.SetError(txtNombre, "");
+                _errorProvider.SetError(txtPrecio, "");
+                _errorProvider.SetError(txtStock, "");
+                _errorProvider.SetError(textBox2, "");
+                _errorProvider.SetError(textBox1, "");
+                _errorProvider.SetError(cbCategoria, "");
+                _errorProvider.SetError(cbSuplidor, "");
+
+                bool hasErrors = false;
+
                 if (string.IsNullOrWhiteSpace(txtNombre.Text))
                 {
-                    MessageBox.Show("El nombre del producto es obligatorio.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
+                    _errorProvider.SetError(txtNombre, "El nombre del producto es obligatorio.");
+                    hasErrors = true;
                 }
+
+                if (!string.IsNullOrWhiteSpace(txtPrecio.Text) && (!decimal.TryParse(txtPrecio.Text, out var precioTemp) || precioTemp < 0))
+                {
+                    _errorProvider.SetError(txtPrecio, "El precio debe ser un número mayor o igual a cero.");
+                    hasErrors = true;
+                }
+
+                if (!string.IsNullOrWhiteSpace(txtStock.Text) && !short.TryParse(txtStock.Text, out _))
+                {
+                    _errorProvider.SetError(txtStock, "El stock debe ser un número entero válido.");
+                    hasErrors = true;
+                }
+
+                if (!string.IsNullOrWhiteSpace(textBox2.Text) && !short.TryParse(textBox2.Text, out _))
+                {
+                    _errorProvider.SetError(textBox2, "Unidades en orden debe ser un número entero válido.");
+                    hasErrors = true;
+                }
+
+                if (!string.IsNullOrWhiteSpace(textBox1.Text) && !short.TryParse(textBox1.Text, out _))
+                {
+                    _errorProvider.SetError(textBox1, "Nivel de reorden debe ser un número entero válido.");
+                    hasErrors = true;
+                }
+
+                if (cbCategoria.SelectedValue == null)
+                {
+                    _errorProvider.SetError(cbCategoria, "Seleccione una categoría.");
+                    hasErrors = true;
+                }
+
+                if (cbSuplidor.SelectedValue == null)
+                {
+                    _errorProvider.SetError(cbSuplidor, "Seleccione un suplidor.");
+                    hasErrors = true;
+                }
+
+                if (hasErrors)
+                    return;
+
                 // Generamos el DTO de creación/actualización con los datos de los controles
                 var itemDto = new CreateProductDto
                 {
@@ -61,7 +112,6 @@ namespace SistemaInventario.Presentacion
                     Discontinued = checkBox1.Checked,
                     CategoryID = cbCategoria.SelectedValue != null ? (int?)cbCategoria.SelectedValue : null,
                     SupplierID = cbSuplidor.SelectedValue != null ? (int?)cbSuplidor.SelectedValue : null,
-                    
                 };
                 if (_productoDto == null)
                 {
@@ -81,6 +131,44 @@ namespace SistemaInventario.Presentacion
                 {
                     formContenedor.DialogResult = DialogResult.OK;
                     formContenedor.Close();
+                }
+            }
+            catch (FluentValidation.ValidationException valEx)
+            {
+                foreach (var error in valEx.Errors)
+                {
+                    if (error.PropertyName.Contains("ProductName"))
+                    {
+                        _errorProvider.SetError(txtNombre, error.ErrorMessage);
+                    }
+                    else if (error.PropertyName.Contains("UnitPrice"))
+                    {
+                        _errorProvider.SetError(txtPrecio, error.ErrorMessage);
+                    }
+                    else if (error.PropertyName.Contains("UnitsInStock"))
+                    {
+                        _errorProvider.SetError(txtStock, error.ErrorMessage);
+                    }
+                    else if (error.PropertyName.Contains("UnitsOnOrder"))
+                    {
+                        _errorProvider.SetError(textBox2, error.ErrorMessage);
+                    }
+                    else if (error.PropertyName.Contains("ReorderLevel"))
+                    {
+                        _errorProvider.SetError(textBox1, error.ErrorMessage);
+                    }
+                    else if (error.PropertyName.Contains("CategoryID"))
+                    {
+                        _errorProvider.SetError(cbCategoria, error.ErrorMessage);
+                    }
+                    else if (error.PropertyName.Contains("SupplierID"))
+                    {
+                        _errorProvider.SetError(cbSuplidor, error.ErrorMessage);
+                    }
+                    else
+                    {
+                        MessageBox.Show(error.ErrorMessage, "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
             catch (Exception ex)

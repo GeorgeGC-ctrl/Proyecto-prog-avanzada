@@ -1,6 +1,6 @@
 ﻿namespace SistemaInventario.Presentacion
 {
-    partial class UserControlOrdenes
+    partial class UserControlPapelera
     {
         /// <summary> 
         /// Variable del diseñador necesaria.

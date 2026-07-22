@@ -1,4 +1,4 @@
-﻿using Microsoft.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using Northwind.Entities.DTOs;
 using Northwind.LogicaNegocios.Suplidores;
 using SistemaInventario.Entidades;
@@ -18,6 +18,7 @@ namespace SistemaInventario.Presentacion
     {
         private ISuppliersService? _suppliersService;
         private int? _suplidorId;
+        private readonly ErrorProvider _errorProvider = new();
         // Constructor sin parámetros — requerido por el Designer
         public ucAgregarSuplidor()
         {
@@ -54,6 +55,31 @@ namespace SistemaInventario.Presentacion
         // ── Guardar (Crear o Actualizar) ──────────────────────────
         private async void iconButton3_Click(object sender, EventArgs e)
         {
+            _errorProvider.SetError(txtEmpresa, "");
+            _errorProvider.SetError(txtContacto, "");
+            _errorProvider.SetError(txtWeb, "");
+            _errorProvider.SetError(textBox1, "");
+            _errorProvider.SetError(textBox2, "");
+            _errorProvider.SetError(txtTelefono, "");
+            _errorProvider.SetError(txtCorreo, "");
+
+            bool hasErrors = false;
+
+            if (string.IsNullOrWhiteSpace(txtEmpresa.Text))
+            {
+                _errorProvider.SetError(txtEmpresa, "El nombre de la compañía es obligatorio.");
+                hasErrors = true;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtContacto.Text))
+            {
+                _errorProvider.SetError(txtContacto, "El nombre del contacto no puede estar vacío.");
+                hasErrors = true;
+            }
+
+            if (hasErrors)
+                return;
+
             try
             {
                 var dto = new CreateSuppliersDto
@@ -74,6 +100,44 @@ namespace SistemaInventario.Presentacion
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                 // Cerrar el Form contenedor
                 ParentForm?.Close();
+            }
+            catch (FluentValidation.ValidationException valEx)
+            {
+                foreach (var error in valEx.Errors)
+                {
+                    if (error.PropertyName.Contains("CompanyName"))
+                    {
+                        _errorProvider.SetError(txtEmpresa, error.ErrorMessage);
+                    }
+                    else if (error.PropertyName.Contains("ContactName"))
+                    {
+                        _errorProvider.SetError(txtContacto, error.ErrorMessage);
+                    }
+                    else if (error.PropertyName.Contains("Address"))
+                    {
+                        _errorProvider.SetError(txtWeb, error.ErrorMessage);
+                    }
+                    else if (error.PropertyName.Contains("Country"))
+                    {
+                        _errorProvider.SetError(textBox1, error.ErrorMessage);
+                    }
+                    else if (error.PropertyName.Contains("City"))
+                    {
+                        _errorProvider.SetError(textBox2, error.ErrorMessage);
+                    }
+                    else if (error.PropertyName.Contains("Phone"))
+                    {
+                        _errorProvider.SetError(txtTelefono, error.ErrorMessage);
+                    }
+                    else if (error.PropertyName.Contains("Fax"))
+                    {
+                        _errorProvider.SetError(txtCorreo, error.ErrorMessage);
+                    }
+                    else
+                    {
+                        MessageBox.Show(error.ErrorMessage, "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
             }
             catch (Exception ex)
             {

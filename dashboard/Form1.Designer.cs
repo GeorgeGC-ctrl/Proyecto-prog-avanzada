@@ -112,7 +112,7 @@ namespace dashboard
             btnPapelera.FlatAppearance.BorderSize = 0;
             btnPapelera.FlatStyle = FlatStyle.Flat;
             btnPapelera.ForeColor = Color.Transparent;
-            btnPapelera.IconChar = IconChar.Trash;
+            btnPapelera.IconChar = IconChar.Receipt;
             btnPapelera.IconColor = SystemColors.Highlight;
             btnPapelera.IconFont = IconFont.Auto;
             btnPapelera.ImageAlign = ContentAlignment.MiddleLeft;
@@ -121,7 +121,7 @@ namespace dashboard
             btnPapelera.Padding = new Padding(10, 0, 20, 0);
             btnPapelera.Size = new Size(280, 60);
             btnPapelera.TabIndex = 5;
-            btnPapelera.Text = "Papelera";
+            btnPapelera.Text = "Ordenes";
             btnPapelera.TextAlign = ContentAlignment.MiddleLeft;
             btnPapelera.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnPapelera.UseVisualStyleBackColor = true;
@@ -196,7 +196,7 @@ namespace dashboard
             btnDashboard.FlatAppearance.BorderSize = 0;
             btnDashboard.FlatStyle = FlatStyle.Flat;
             btnDashboard.ForeColor = Color.Transparent;
-            btnDashboard.IconChar = IconChar.ChartLine;
+            btnDashboard.IconChar = IconChar.ChartSimple;
             btnDashboard.IconColor = SystemColors.Highlight;
             btnDashboard.IconFont = IconFont.Solid;
             btnDashboard.ImageAlign = ContentAlignment.MiddleLeft;
