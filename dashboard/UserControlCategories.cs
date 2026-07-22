@@ -1,6 +1,7 @@
-﻿using Northwind.Entidades.DTOs;
+using Northwind.Entidades.DTOs;
+using Northwind.LogicaNegocios.Categorias;
+using Northwind.UI.DatagridViewStyle;
 using SistemaInventario.Entidades;
-using SistemaInventario.LogicaNegocios;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,12 +12,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static Northwind.UI.DatagridViewStyle.DataGridViewStyleHelper;
 
 namespace dashboard
 {
     public partial class UserControlCategories : UserControl
-    {
-
+    {        
         private int? _selectedCategoryId = null;
         private List<CategoryDto> _allCategories = new List<CategoryDto>();
         private readonly ICategoryService _categoryService;
@@ -24,31 +25,22 @@ namespace dashboard
         public UserControlCategories(ICategoryService categoryService)
         {
             InitializeComponent();
-            this.Load += Categories_Load;
             this._categoryService = categoryService;
-
         }
-
+       
         private async void Categories_Load(object sender, EventArgs e)
         {
+            // 1. Aplicamos el estilo al grid
+            EstiloGrid.AplicarA(CatDgv, TemaGrid.Claro());
+            // 2. Creamos el gestor de acciones (creará automáticamente la columna de botones)
+            var acciones = new GestorColumnaAcciones(CatDgv, TemaGrid.Claro());
+            // 3. Suscribimos los eventos de los botones a nuestros métodos
+            acciones.Editar += (rowIndex) => EjecutarEditar(rowIndex);
+            acciones.Eliminar += (rowIndex) => EjecutarEliminar(rowIndex);
+            // 4. Cargamos los datos desde la base de datos (una sola vez)
             await RefrescarCategorias();
 
-            CatDgv.BorderStyle = BorderStyle.None;
-            CatDgv.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            CatDgv.GridColor = Color.FromArgb(226, 232, 240); // #E2E8F0
-            CatDgv.BackgroundColor = Color.White;
-            CatDgv.RowHeadersVisible = false;
-            CatDgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            CatDgv.DefaultCellStyle.BackColor = Color.White;
-            CatDgv.DefaultCellStyle.ForeColor = Color.FromArgb(100, 116, 139);
-            CatDgv.DefaultCellStyle.Font = new Font("Segoe UI", 9f);
-            CatDgv.DefaultCellStyle.Padding = new Padding(8, 0, 8, 0);
-            CatDgv.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(245, 247, 250);
-            CatDgv.ColumnHeadersDefaultCellStyle.ForeColor = Color.FromArgb(148, 163, 184);
-            CatDgv.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 8f, FontStyle.Bold);
-            CatDgv.ColumnHeadersHeight = 36;
-            CatDgv.RowTemplate.Height = 44;
-            CatDgv.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(250, 251, 252);
+           
         }
 
         private async Task RefrescarCategorias()
@@ -143,19 +135,7 @@ namespace dashboard
             {
                 MessageBox.Show("Ocurrió un error al guardar: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-
-
-        private Categories ObtenerProductoDesdeFormulario()
-        {
-            return new Categories
-            {
-                CategoryName = txtNombre.Text.Trim(),
-                Description = txtDescripcion.Text.Trim(),
-            };
-
-        }
+        }    
 
         private void iconButton3_Click(object sender, EventArgs e)
         {
@@ -192,16 +172,6 @@ namespace dashboard
             {
                 MessageBox.Show("Seleccione una fila en la tabla para poder eliminarla.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-        }
-
-        private int ObtenerIdSeleccionado()
-        {
-            if (CatDgv.SelectedRows.Count == 0)
-                throw new Exception("Debe seleccionar una Categoria.");
-
-            return Convert.ToInt32(
-                CatDgv.SelectedRows[0].Cells["Id"].Value
-            );
         }
         private void LimpiarFormulario()
         {
@@ -244,11 +214,60 @@ namespace dashboard
                     .ToList();
                 CatDgv.DataSource = filtered;
             }
-        
 
+
+        }
+
+        private void ConfigurarEstilosGrid()
+        {
+            // Aplicamos el estilo moderno y le definimos qué métodos ejecutar cuando se hace click en Editar o Eliminar
+            //DataGridViewStyleHelper.(CatDgv,
+            //    onEditar: (row) => EjecutarEditar(row),
+            //    onEliminar: (row) => EjecutarEliminar(row)
+            //);
+        }
+
+        // Lógica al presionar el lápiz (Editar)
+        // Método que se ejecuta al presionar el lápiz (Editar)
+        private void EjecutarEditar(int rowIndex)
+        {
+            if (rowIndex >= 0 && rowIndex < CatDgv.Rows.Count)
+            {
+                // Obtenemos la categoría asociada a esa fila
+                var category = (CategoryDto)CatDgv.Rows[rowIndex].DataBoundItem;
+                _selectedCategoryId = category.Id;
+                txtNombre.Text = category.Nombre;
+                txtDescripcion.Text = category.Descripcion;
+                iconButton5.Text = "Actualizar"; // Cambia el botón de guardar a Actualizar
+            }
+        }
+        // Método que se ejecuta al presionar la papelera (Eliminar)
+        private async void EjecutarEliminar(int rowIndex)
+        {
+            if (rowIndex >= 0 && rowIndex < CatDgv.Rows.Count)
+            {
+                try
+                {
+                    var category = (CategoryDto)CatDgv.Rows[rowIndex].DataBoundItem;
+                    DialogResult result = MessageBox.Show(
+                        $"¿Está seguro de eliminar la categoría '{category.Nombre}'?",
+                        "Confirmar Eliminación",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Question);
+                    if (result == DialogResult.Yes)
+                    {
+                        await _categoryService.DeleteCategoryAsync(category.Id);
+                        MessageBox.Show("Categoría eliminada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        LimpiarFormulario();
+                        await RefrescarCategorias();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al eliminar la categoría: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
     }
 }
-
-}
-
-

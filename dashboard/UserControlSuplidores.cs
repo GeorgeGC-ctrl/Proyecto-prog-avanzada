@@ -1,5 +1,4 @@
 ﻿using SistemaInventario.Entidades;
-using SistemaInventario.LogicaNegocios;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

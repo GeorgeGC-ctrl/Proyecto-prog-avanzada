@@ -1,4 +1,6 @@
-using SistemaInventario.LogicaNegocios;
+using Northwind.LogicaNegocios.Categorias;
+using Northwind.LogicaNegocios.Productos;
+using Northwind.LogicaNegocios.Suplidores;
 using SistemaInventario.Presentacion;
 using System.Drawing.Drawing2D;
 using System.Threading.Tasks;
@@ -7,16 +9,17 @@ namespace dashboard
 {
     public partial class Form1 : Form
     {
-
         private bool isActive = false;
         private readonly ICategoryService _categoriaService;
-
-        public Form1(ICategoryService categoryService)
+        private readonly IProductService _productService;
+        private readonly ISuppliersService _suppliersService; // Nuevo campo
+        // Constructor modificado
+        public Form1(ICategoryService categoryService, IProductService productService, ISuppliersService suppliersService)
         {
             InitializeComponent();
             this._categoriaService = categoryService;
-            
-
+            this._productService = productService;
+            this._suppliersService = suppliersService; // Guardar instancia
         }
 
         private async void Form1_Load1(object? sender, EventArgs e)
@@ -44,10 +47,12 @@ namespace dashboard
         {
         }
 
-        private async Task Form1_Load(object sender, EventArgs e)
+        private async void Form1_Load(object sender, EventArgs e)
         {
-            
-           
+            // Cargar el ucDashboard al inicio
+            var dashboard = new ucDashboard();
+            dashboard.Dock = DockStyle.Fill;
+            conteinerPanel.Controls.Add(dashboard);
         }
 
         private void nav_Paint(object sender, PaintEventArgs e)
@@ -152,7 +157,7 @@ namespace dashboard
         private void btnProduct_Click(object sender, EventArgs e)
         {
             conteinerPanel.Controls.Clear();
-            var userControl = new UserControlProducts();
+            var userControl = new UserControlProducts(_productService, _categoriaService, _suppliersService);
             userControl.Dock = DockStyle.Fill;
             conteinerPanel.Controls.Add(userControl);
         }
@@ -168,10 +173,7 @@ namespace dashboard
 
         private void conteinerPanel_Paint(object sender, PaintEventArgs e)
         {
-            ucDashboard dashboard = new ucDashboard();
-            dashboard.Dock = DockStyle.Fill;
-            conteinerPanel.Controls.Add(dashboard);
-
+            // Evento de pintura — no crear controles aquí.
         }
 
         private void btnPapelera_Click(object sender, EventArgs e)

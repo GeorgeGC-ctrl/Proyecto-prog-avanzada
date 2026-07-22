@@ -3,7 +3,6 @@ using LiveChartsCore.SkiaSharpView;
 using LiveChartsCore.SkiaSharpView.Painting;
 using LiveChartsCore.SkiaSharpView.WinForms;
 using SkiaSharp;
-using SistemaInventario.LogicaNegocios;
 using System;
 using System.Drawing;
 using System.Linq;

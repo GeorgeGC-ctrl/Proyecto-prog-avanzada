@@ -1,4 +1,4 @@
-﻿using FontAwesome.Sharp;
+using FontAwesome.Sharp;
 
 namespace dashboard
 {
@@ -304,7 +304,7 @@ namespace dashboard
             Name = "Form1";
             Text = "System";
             WindowState = FormWindowState.Maximized;
-            Load += Form1_Load1;
+            Load += Form1_Load;
             Sidebar.ResumeLayout(false);
             nav.ResumeLayout(false);
             nav.PerformLayout();

@@ -1,33 +1,33 @@
 ﻿using SistemaInventario.Entidades;
+using Northwind.LogicaNegocios.Productos;
+using Northwind.LogicaNegocios.Categorias;
+using Northwind.LogicaNegocios.Suplidores;
+using Northwind.Entities.DTOs;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SistemaInventario.Presentacion
 {
     public partial class Form2 : Form
     {
-        private Productos _producto;
-        public Form2()
+        private readonly IProductService _productService;
+        private readonly ICategoryService _categoryService;
+        private readonly ISuppliersService _suppliersService;
+        private readonly ProductsDto _productoDto;
+
+        public Form2(IProductService productService, ICategoryService categoryService, ISuppliersService suppliersService, ProductsDto productoDto = null)
         {
             InitializeComponent();
-            _producto = new Productos();
+            _productService = productService;
+            _categoryService = categoryService;
+            _suppliersService = suppliersService;
+            _productoDto = productoDto;
         }
 
-        private void Form2_Load(object sender, EventArgs e)
+        private async void Form2_Load(object sender, EventArgs e)
         {
-            AgregarProducto agregarProducto = new AgregarProducto();
-            agregarProducto.Dock = DockStyle.Fill;
-            panelAgregar.Controls.Add(agregarProducto);
-
-            if (_producto != null)
-                agregarProducto.CargarProducto(_producto);
+            // Llamamos al inicializador asíncrono sobre el control agregarProducto1 del Diseñador
+            await agregarProducto1.InitializeDependenciesAsync(_productService, _categoryService, _suppliersService, _productoDto);
         }
     }
 }

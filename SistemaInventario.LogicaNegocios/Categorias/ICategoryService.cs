@@ -1,6 +1,6 @@
 ﻿using Northwind.Entidades.DTOs;
 
-namespace SistemaInventario.LogicaNegocios
+namespace Northwind.LogicaNegocios.Categorias
 {
     public interface ICategoryService
     {

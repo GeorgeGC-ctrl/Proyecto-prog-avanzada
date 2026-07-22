@@ -28,7 +28,7 @@ namespace SistemaInventario.AccesoDatos.Repositorios
         }
         public async Task UpdateAsync(T entity)
         {
-            _dbSet.Update(entity);
+             _dbSet.Update(entity);
             await _context.SaveChangesAsync();
         }
         public async Task DeleteAsync(int id)
@@ -36,7 +36,7 @@ namespace SistemaInventario.AccesoDatos.Repositorios
             var entity = await GetByIdAsync(id);
             if (entity != null)
             {
-                _dbSet.Remove(entity);
+                 _dbSet.Remove(entity);
                 await _context.SaveChangesAsync();
             }
         }

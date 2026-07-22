@@ -29,31 +29,44 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            ucAgregarSuplidor1 = new ucAgregarSuplidor();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
             // 
+            panel1.Controls.Add(ucAgregarSuplidor1);
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(644, 645);
+            panel1.Size = new Size(524, 726);
             panel1.TabIndex = 0;
+            // 
+            // ucAgregarSuplidor1
+            // 
+            ucAgregarSuplidor1.Dock = DockStyle.Fill;
+            ucAgregarSuplidor1.Location = new Point(0, 0);
+            ucAgregarSuplidor1.Name = "ucAgregarSuplidor1";
+            ucAgregarSuplidor1.Size = new Size(524, 726);
+            ucAgregarSuplidor1.TabIndex = 0;
             // 
             // Form3
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(644, 645);
+            ClientSize = new Size(524, 726);
             Controls.Add(panel1);
             Name = "Form3";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Form3";
             Load += Form3_Load;
+            panel1.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
 
         private Panel panel1;
+        private ucAgregarSuplidor ucAgregarSuplidor1;
     }
 }

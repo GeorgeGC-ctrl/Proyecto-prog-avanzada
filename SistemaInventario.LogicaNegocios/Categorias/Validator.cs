@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SistemaInventario.LogicaNegocios
+namespace Northwind.LogicaNegocios.Categorias
 {
     public class CreateCategoryValidator : AbstractValidator<CreateCategoryDto>
     {

@@ -32,17 +32,11 @@ namespace dashboard
 
             var serviceProvider = services.BuildServiceProvider();
 
-
-
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
 
             var mainForm = serviceProvider.GetRequiredService<Form1>();
-            var userControlCategories = serviceProvider.GetRequiredService<UserControlCategories>();
-            var userControlProducts = serviceProvider.GetRequiredService<UserControlProducts>();
-            var userControlSuplidores = serviceProvider.GetRequiredService<UserControlSuplidores>();
-
             Application.Run(mainForm);
         }
     }

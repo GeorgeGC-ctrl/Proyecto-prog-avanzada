@@ -1,5 +1,8 @@
-﻿using SistemaInventario.Entidades;
-using SistemaInventario.LogicaNegocios;
+using Northwind.Entities.DTOs;
+using Northwind.LogicaNegocios.Categorias;
+using Northwind.LogicaNegocios.Productos;
+using Northwind.LogicaNegocios.Suplidores;
+using SistemaInventario.Entidades;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,66 +12,131 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static Northwind.UI.DatagridViewStyle.DataGridViewStyleHelper;
 
 namespace SistemaInventario.Presentacion
 {
     public partial class UserControlProducts : UserControl
     {
-        
-        public UserControlProducts()
+        private readonly IProductService _productService;
+        private readonly ICategoryService _categoryService;
+        private readonly ISuppliersService _suppliersService;
+        public UserControlProducts(IProductService productService, ICategoryService categoryService, ISuppliersService suppliersService)
         {
             InitializeComponent();
-
+            this._productService = productService;
+            this._categoryService = categoryService;
+            this._suppliersService = suppliersService;
         }
 
-        private void UserControlProducts_Load(object sender, EventArgs e)
+        private async void UserControlProducts_Load(object sender, EventArgs e)
         {
-           
+            await RefrescarProductos();
 
-            ProductosDgv.BorderStyle = BorderStyle.None;
-            ProductosDgv.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            ProductosDgv.GridColor = Color.FromArgb(226, 232, 240); // #E2E8F0
-            ProductosDgv.BackgroundColor = Color.White;
-            ProductosDgv.RowHeadersVisible = false;
-            ProductosDgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            ProductosDgv.DefaultCellStyle.BackColor = Color.White;
-            ProductosDgv.DefaultCellStyle.ForeColor = Color.FromArgb(100, 116, 139);
-            ProductosDgv.DefaultCellStyle.Font = new Font("Segoe UI", 9f);
-            ProductosDgv.DefaultCellStyle.Padding = new Padding(8, 0, 8, 0);
-            ProductosDgv.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(245, 247, 250);
-            ProductosDgv.ColumnHeadersDefaultCellStyle.ForeColor = Color.FromArgb(148, 163, 184);
-            ProductosDgv.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 8f, FontStyle.Bold);
-            ProductosDgv.ColumnHeadersHeight = 36;
-            ProductosDgv.RowTemplate.Height = 44;
-            ProductosDgv.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(250, 251, 252);
-        }
-
-        private void iconButton3_Click(object sender, EventArgs e)
-        {
-            Form2 form2 = new Form2();
-            form2.ShowDialog();
-
-        }
-
-        private void iconButton3_Paint(object sender, PaintEventArgs e)
-        {
             
         }
-
-        private void ProductosDgv_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        public async Task RefrescarProductos()
         {
+            try
+            {
+                var datos = await _productService.GetAllProductsAsync();
+                ProductosDgv.DataSource = null;
+                ProductosDgv.DataSource = datos.ToList();
+                // Ocultar columnas de ID
+                if (ProductosDgv.Columns["SupplierID"] != null) ProductosDgv.Columns["SupplierID"].Visible = false;
+                if (ProductosDgv.Columns["CategoryID"] != null) ProductosDgv.Columns["CategoryID"].Visible = false;
+                // Renombrar columnas para la UI
+                if (ProductosDgv.Columns["ProductName"] != null) ProductosDgv.Columns["ProductName"].HeaderText = "Producto";
+                if (ProductosDgv.Columns["CategoriaNombre"] != null) ProductosDgv.Columns["CategoriaNombre"].HeaderText = "Categoría";
+                if (ProductosDgv.Columns["SuplidorNombre"] != null) ProductosDgv.Columns["SuplidorNombre"].HeaderText = "Suplidor";
+                if (ProductosDgv.Columns["UnitPrice"] != null) ProductosDgv.Columns["UnitPrice"].HeaderText = "Precio";
+                if (ProductosDgv.Columns["UnitsInStock"] != null) ProductosDgv.Columns["UnitsInStock"].HeaderText = "En Stock";
+
+                if (ProductosDgv.Columns["Discontinued"] != null)
+                    ProductosDgv.Columns["Discontinued"].Visible = false;
+                // Renombrar la nueva columna de texto
+                if (ProductosDgv.Columns["Estado"] != null) ProductosDgv.Columns["Estado"].HeaderText = "Estado";
+
+                EstiloGrid.AplicarA(ProductosDgv, TemaGrid.Claro());
+                var acciones = new GestorColumnaAcciones(ProductosDgv, TemaGrid.Claro());
+
+                acciones.Editar += (rowIndex) => EjecutarEditar(rowIndex);
+                acciones.Eliminar += (rowIndex) => EjecutarEliminar(rowIndex);
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar productos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private async void iconButton3_Click(object sender, EventArgs e)
+        {
+            Form2 form2 = new Form2(_productService, _categoryService, _suppliersService, null);
+            if (form2.ShowDialog() == DialogResult.OK)
+            {
+                await RefrescarProductos();
+            }
 
         }
-        public void RefrescarProductos()
+        
+        public async void EjecutarEditar(int rowIndex)
         {
-            ProductosDgv.DataSource = null;
-           
+            try
+            {
+                if (ProductosDgv.SelectedRows.Count == 0)
+                {
+                    MessageBox.Show("Debe seleccionar un producto de la lista para editar.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                // Recuperamos el DTO de la fila seleccionada
+                var productoDto = (ProductsDto)ProductosDgv.SelectedRows[0].DataBoundItem;
+                Form2 form2 = new Form2(_productService, _categoryService, _suppliersService, productoDto);
+                if (form2.ShowDialog() == DialogResult.OK)
+                {
+                    await RefrescarProductos();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al intentar editar: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
-        private void iconButton4_Click(object sender, EventArgs e)
+        public async void EjecutarEliminar(int rowIndex)
         {
-            RefrescarProductos();
+            try
+            {
+                if (ProductosDgv.SelectedRows.Count == 0)
+                {
+                    MessageBox.Show("Debe seleccionar un producto para eliminar.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                var productoDto = (ProductsDto)ProductosDgv.SelectedRows[0].DataBoundItem;
+                DialogResult respuesta = MessageBox.Show(
+                    $"¿Está seguro de eliminar el producto '{productoDto.ProductName}'?",
+                    "Confirmar eliminación",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+                if (respuesta == DialogResult.Yes)
+                {
+                    await _productService.DeleteProductAsync(productoDto.ProductID);
+                    MessageBox.Show(
+                        "Producto eliminado correctamente.",
+                        "Éxito",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                    await RefrescarProductos();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al eliminar: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+
+
         private int ObtenerIdSeleccionado()
         {
             if (ProductosDgv.SelectedRows.Count == 0)
@@ -114,47 +182,7 @@ namespace SistemaInventario.Presentacion
             }
         }
 
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void iconButton1_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (ProductosDgv.SelectedRows.Count == 0)
-                {
-                    MessageBox.Show("Debe seleccionar un producto para editar.",
-                        "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                var fila = ProductosDgv.SelectedRows[0];
-
-                var producto = new Productos
-                {
-                    Id = Convert.ToInt32(fila.Cells["Id"].Value),
-                    Nombre = fila.Cells["Nombre"].Value.ToString(),
-                    Precio = Convert.ToDecimal(fila.Cells["Precio"].Value),
-                    CategoriaId = Convert.ToInt32(fila.Cells["CategoriaId"].Value),
-                    SuplidorId = Convert.ToInt32(fila.Cells["SuplidorId"].Value)
-                };
-
-                Form2 form2 = new Form2();
-                form2.ShowDialog();
-                RefrescarProductos();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+       
     }
 }
 

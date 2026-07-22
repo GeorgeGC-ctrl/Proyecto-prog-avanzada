@@ -4,7 +4,7 @@ using SistemaInventario.AccesoDatos;
 using SistemaInventario.Entidades;
 using System.Data;
 
-namespace SistemaInventario.LogicaNegocios
+namespace Northwind.LogicaNegocios.Categorias
 {
     public class CategoryService : ICategoryService
     {
@@ -14,8 +14,8 @@ namespace SistemaInventario.LogicaNegocios
 
         public CategoryService(IUnitOfWork unitOfWork, IValidator<CreateCategoryDto> createCategoryValidator)
         {
-           this.unitOfWork1 = unitOfWork;
-           this._createCategoryValidator = createCategoryValidator;
+           unitOfWork1 = unitOfWork;
+           _createCategoryValidator = createCategoryValidator;
         }
         public async Task<IReadOnlyList<CategoryDto>> GetAllCategoriesAsync()
         {

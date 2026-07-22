@@ -40,6 +40,10 @@
             label6 = new Label();
             label5 = new Label();
             panel3 = new Panel();
+            textBox2 = new TextBox();
+            textBox1 = new TextBox();
+            label10 = new Label();
+            label8 = new Label();
             txtWeb = new TextBox();
             label4 = new Label();
             txtEmpresa = new TextBox();
@@ -65,24 +69,23 @@
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(521, 642);
+            panel1.Size = new Size(521, 717);
             panel1.TabIndex = 1;
             // 
             // iconButton1
             // 
             iconButton1.BackColor = Color.IndianRed;
-            iconButton1.Dock = DockStyle.Right;
             iconButton1.FlatAppearance.BorderSize = 0;
-            iconButton1.FlatStyle = FlatStyle.Popup;
+            iconButton1.FlatStyle = FlatStyle.Flat;
             iconButton1.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             iconButton1.ForeColor = Color.White;
             iconButton1.IconChar = FontAwesome.Sharp.IconChar.Cancel;
             iconButton1.IconColor = Color.Black;
             iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
             iconButton1.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButton1.Location = new Point(305, 557);
+            iconButton1.Location = new Point(311, 636);
             iconButton1.Name = "iconButton1";
-            iconButton1.Size = new Size(216, 85);
+            iconButton1.Size = new Size(177, 58);
             iconButton1.TabIndex = 7;
             iconButton1.Text = "Cancelar";
             iconButton1.TextAlign = ContentAlignment.MiddleLeft;
@@ -92,18 +95,17 @@
             // iconButton3
             // 
             iconButton3.BackColor = Color.FromArgb(16, 185, 129);
-            iconButton3.Dock = DockStyle.Fill;
             iconButton3.FlatAppearance.BorderSize = 0;
-            iconButton3.FlatStyle = FlatStyle.Popup;
+            iconButton3.FlatStyle = FlatStyle.Flat;
             iconButton3.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             iconButton3.ForeColor = Color.White;
             iconButton3.IconChar = FontAwesome.Sharp.IconChar.CirclePlus;
             iconButton3.IconColor = Color.Black;
             iconButton3.IconFont = FontAwesome.Sharp.IconFont.Auto;
             iconButton3.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButton3.Location = new Point(0, 557);
+            iconButton3.Location = new Point(101, 636);
             iconButton3.Name = "iconButton3";
-            iconButton3.Size = new Size(521, 85);
+            iconButton3.Size = new Size(179, 58);
             iconButton3.TabIndex = 6;
             iconButton3.Text = "Guardar";
             iconButton3.TextAlign = ContentAlignment.MiddleLeft;
@@ -121,22 +123,21 @@
             panel4.Controls.Add(label6);
             panel4.Controls.Add(label5);
             panel4.Dock = DockStyle.Top;
-            panel4.Location = new Point(0, 305);
+            panel4.Location = new Point(0, 388);
             panel4.Name = "panel4";
-            panel4.Size = new Size(521, 252);
+            panel4.Size = new Size(521, 233);
             panel4.TabIndex = 2;
             // 
             // txtCorreo
             // 
-            txtCorreo.Location = new Point(196, 145);
+            txtCorreo.Location = new Point(206, 143);
             txtCorreo.Name = "txtCorreo";
-            txtCorreo.PlaceholderText = "Correo@dominio.com";
             txtCorreo.Size = new Size(269, 31);
             txtCorreo.TabIndex = 18;
             // 
             // txtTelefono
             // 
-            txtTelefono.Location = new Point(3, 145);
+            txtTelefono.Location = new Point(13, 143);
             txtTelefono.Mask = "000-000-0000";
             txtTelefono.Name = "txtTelefono";
             txtTelefono.Size = new Size(159, 31);
@@ -148,15 +149,15 @@
             label9.BackColor = Color.Transparent;
             label9.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label9.ForeColor = SystemColors.ControlDarkDark;
-            label9.Location = new Point(197, 121);
+            label9.Location = new Point(207, 119);
             label9.Name = "label9";
-            label9.Size = new Size(61, 21);
+            label9.Size = new Size(33, 21);
             label9.TabIndex = 16;
-            label9.Text = "Correo";
+            label9.Text = "Fax";
             // 
             // txtContacto
             // 
-            txtContacto.Location = new Point(3, 76);
+            txtContacto.Location = new Point(13, 74);
             txtContacto.Name = "txtContacto";
             txtContacto.Size = new Size(432, 31);
             txtContacto.TabIndex = 15;
@@ -167,7 +168,7 @@
             label7.BackColor = Color.Transparent;
             label7.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label7.ForeColor = SystemColors.ControlDarkDark;
-            label7.Location = new Point(3, 121);
+            label7.Location = new Point(13, 119);
             label7.Name = "label7";
             label7.Size = new Size(74, 21);
             label7.TabIndex = 12;
@@ -179,7 +180,7 @@
             label6.BackColor = Color.Transparent;
             label6.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label6.ForeColor = SystemColors.ControlDarkDark;
-            label6.Location = new Point(3, 52);
+            label6.Location = new Point(13, 50);
             label6.Name = "label6";
             label6.Size = new Size(159, 21);
             label6.TabIndex = 10;
@@ -199,6 +200,10 @@
             // 
             // panel3
             // 
+            panel3.Controls.Add(textBox2);
+            panel3.Controls.Add(textBox1);
+            panel3.Controls.Add(label10);
+            panel3.Controls.Add(label8);
             panel3.Controls.Add(txtWeb);
             panel3.Controls.Add(label4);
             panel3.Controls.Add(txtEmpresa);
@@ -207,13 +212,53 @@
             panel3.Dock = DockStyle.Top;
             panel3.Location = new Point(0, 84);
             panel3.Name = "panel3";
-            panel3.Size = new Size(521, 221);
+            panel3.Size = new Size(521, 304);
             panel3.TabIndex = 1;
+            // 
+            // textBox2
+            // 
+            textBox2.BorderStyle = BorderStyle.FixedSingle;
+            textBox2.Location = new Point(279, 242);
+            textBox2.Name = "textBox2";
+            textBox2.Size = new Size(209, 31);
+            textBox2.TabIndex = 13;
+            // 
+            // textBox1
+            // 
+            textBox1.BorderStyle = BorderStyle.FixedSingle;
+            textBox1.Location = new Point(12, 242);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(209, 31);
+            textBox1.TabIndex = 12;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.BackColor = Color.Transparent;
+            label10.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label10.ForeColor = SystemColors.ControlDarkDark;
+            label10.Location = new Point(279, 209);
+            label10.Name = "label10";
+            label10.Size = new Size(61, 21);
+            label10.TabIndex = 11;
+            label10.Text = "Ciudad";
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.BackColor = Color.Transparent;
+            label8.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label8.ForeColor = SystemColors.ControlDarkDark;
+            label8.Location = new Point(12, 209);
+            label8.Name = "label8";
+            label8.Size = new Size(38, 21);
+            label8.TabIndex = 10;
+            label8.Text = "Pais";
             // 
             // txtWeb
             // 
             txtWeb.BorderStyle = BorderStyle.FixedSingle;
-            txtWeb.Location = new Point(3, 153);
+            txtWeb.Location = new Point(12, 153);
             txtWeb.Name = "txtWeb";
             txtWeb.Size = new Size(432, 31);
             txtWeb.TabIndex = 9;
@@ -224,16 +269,16 @@
             label4.BackColor = Color.Transparent;
             label4.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label4.ForeColor = SystemColors.ControlDarkDark;
-            label4.Location = new Point(3, 117);
+            label4.Location = new Point(12, 117);
             label4.Name = "label4";
-            label4.Size = new Size(78, 21);
+            label4.Size = new Size(79, 21);
             label4.TabIndex = 8;
-            label4.Text = "Sitio web";
+            label4.Text = "Direccion";
             // 
             // txtEmpresa
             // 
             txtEmpresa.BorderStyle = BorderStyle.FixedSingle;
-            txtEmpresa.Location = new Point(3, 69);
+            txtEmpresa.Location = new Point(12, 69);
             txtEmpresa.Name = "txtEmpresa";
             txtEmpresa.Size = new Size(432, 31);
             txtEmpresa.TabIndex = 7;
@@ -244,7 +289,7 @@
             label3.BackColor = Color.Transparent;
             label3.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label3.ForeColor = SystemColors.ControlDarkDark;
-            label3.Location = new Point(3, 35);
+            label3.Location = new Point(12, 35);
             label3.Name = "label3";
             label3.Size = new Size(176, 21);
             label3.TabIndex = 6;
@@ -305,7 +350,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(panel1);
             Name = "ucAgregarSuplidor";
-            Size = new Size(521, 642);
+            Size = new Size(521, 717);
             panel1.ResumeLayout(false);
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
@@ -339,5 +384,9 @@
         private MaskedTextBox txtTelefono;
         private Label label9;
         private TextBox txtContacto;
+        private Label label8;
+        private TextBox textBox2;
+        private TextBox textBox1;
+        private Label label10;
     }
 }

@@ -1,6 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
 using SistemaInventario.Entidades;
-using SistemaInventario.LogicaNegocios;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,30 +22,9 @@ namespace SistemaInventario.Presentacion
 
         private void iconButton3_Click(object sender, EventArgs e)
         {
-            try
-            {
-                Suplidores suplidores = ObtenerProductoDesdeFormulario();
-                
-                MessageBox.Show("¡Suplidor guardado exitosamente!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error de validación", MessageBoxButtons.RetryCancel, MessageBoxIcon.Warning);
-            }
+         
         }
         
-        private Suplidores ObtenerProductoDesdeFormulario()
-        {
-            return new Suplidores
-            {
-                Empresa = txtEmpresa.Text.Trim(),
-                Contacto = txtContacto.Text.Trim(),
-                Telefono = txtTelefono.Text.Trim(),
-                Email = txtCorreo.Text.Trim(),
-                website= txtWeb.Text.Trim(),
-                
-            };
-
-        }
+    
     }
 }

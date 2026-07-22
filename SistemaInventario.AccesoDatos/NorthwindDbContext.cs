@@ -20,8 +20,8 @@ namespace SistemaInventario.AccesoDatos
             
         }
        public  DbSet<Categories> Categorias { get; set; }
-        public DbSet<Suplidores> Suplidores { get; set; }
-        public DbSet<Productos> Productos { get; set; }
+        public DbSet<Suppliers> Suplidores { get; set; }
+        public DbSet<Products> Productos { get; set; }
 
     }
      

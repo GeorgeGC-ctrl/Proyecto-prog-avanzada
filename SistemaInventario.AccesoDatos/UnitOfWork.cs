@@ -13,8 +13,8 @@ namespace SistemaInventario.AccesoDatos
             this._context = context;
         }
         public IRepository<Categories> Categorias =>  new GenericRepository<Categories>(_context);
-        public IRepository<Suplidores> Suplidores => new GenericRepository<Suplidores>(_context);
-        public IRepository<Productos> Productos => new GenericRepository<Productos>(_context);
+        public IRepository<Suppliers> Suplidores => new GenericRepository<Suppliers>(_context);
+        public IRepository<Products> Productos => new GenericRepository<Products>(_context);
      
         public async Task BeginTransaction()
         {

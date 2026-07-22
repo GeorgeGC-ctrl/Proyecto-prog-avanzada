@@ -28,36 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            ProductosDgv = new DataGridView();
             panel1 = new Panel();
-            iconButton4 = new FontAwesome.Sharp.IconButton();
             iconButton3 = new FontAwesome.Sharp.IconButton();
             btnEliminar = new FontAwesome.Sharp.IconButton();
             iconButton1 = new FontAwesome.Sharp.IconButton();
             comboBox1 = new ComboBox();
             textBox1 = new TextBox();
             panel2 = new Panel();
-            ((System.ComponentModel.ISupportInitialize)ProductosDgv).BeginInit();
+            ProductosDgv = new DataGridView();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)ProductosDgv).BeginInit();
             SuspendLayout();
-            // 
-            // ProductosDgv
-            // 
-            ProductosDgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            ProductosDgv.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-            ProductosDgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            ProductosDgv.Location = new Point(16, 125);
-            ProductosDgv.Name = "ProductosDgv";
-            ProductosDgv.RowHeadersWidth = 62;
-            ProductosDgv.Size = new Size(1223, 684);
-            ProductosDgv.TabIndex = 0;
-            ProductosDgv.CellContentClick += ProductosDgv_CellContentClick;
             // 
             // panel1
             // 
             panel1.BackColor = Color.WhiteSmoke;
-            panel1.Controls.Add(iconButton4);
             panel1.Controls.Add(iconButton3);
             panel1.Controls.Add(btnEliminar);
             panel1.Controls.Add(iconButton1);
@@ -68,29 +54,7 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(1376, 82);
             panel1.TabIndex = 1;
-            panel1.Paint += panel1_Paint;
-            // 
-            // iconButton4
-            // 
-            iconButton4.BackColor = Color.White;
-            iconButton4.BackgroundImageLayout = ImageLayout.None;
-            iconButton4.Cursor = Cursors.Hand;
-            iconButton4.FlatAppearance.BorderColor = Color.FromArgb(226, 232, 240);
-            iconButton4.FlatStyle = FlatStyle.Flat;
-            iconButton4.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            iconButton4.IconChar = FontAwesome.Sharp.IconChar.Refresh;
-            iconButton4.IconColor = Color.Black;
-            iconButton4.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            iconButton4.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButton4.Location = new Point(754, 18);
-            iconButton4.Name = "iconButton4";
-            iconButton4.Size = new Size(157, 54);
-            iconButton4.TabIndex = 6;
-            iconButton4.Text = "Actualizar";
-            iconButton4.TextAlign = ContentAlignment.MiddleLeft;
-            iconButton4.TextImageRelation = TextImageRelation.ImageBeforeText;
-            iconButton4.UseVisualStyleBackColor = false;
-            iconButton4.Click += iconButton4_Click;
+            
             // 
             // iconButton3
             // 
@@ -111,7 +75,7 @@
             iconButton3.TextImageRelation = TextImageRelation.ImageBeforeText;
             iconButton3.UseVisualStyleBackColor = false;
             iconButton3.Click += iconButton3_Click;
-            iconButton3.Paint += iconButton3_Paint;
+           
             // 
             // btnEliminar
             // 
@@ -154,7 +118,7 @@
             iconButton1.TextAlign = ContentAlignment.MiddleLeft;
             iconButton1.TextImageRelation = TextImageRelation.ImageBeforeText;
             iconButton1.UseVisualStyleBackColor = false;
-            iconButton1.Click += iconButton1_Click;
+            
             // 
             // comboBox1
             // 
@@ -177,31 +141,38 @@
             // 
             panel2.Controls.Add(ProductosDgv);
             panel2.Dock = DockStyle.Fill;
-            panel2.Location = new Point(0, 0);
+            panel2.Location = new Point(0, 82);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1376, 783);
+            panel2.Size = new Size(1376, 701);
             panel2.TabIndex = 2;
-            panel2.Paint += panel2_Paint;
+            // 
+            // ProductosDgv
+            // 
+            ProductosDgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            ProductosDgv.Dock = DockStyle.Fill;
+            ProductosDgv.Location = new Point(0, 0);
+            ProductosDgv.Name = "ProductosDgv";
+            ProductosDgv.RowHeadersWidth = 62;
+            ProductosDgv.Size = new Size(1376, 701);
+            ProductosDgv.TabIndex = 0;
             // 
             // UserControlProducts
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(panel1);
             Controls.Add(panel2);
+            Controls.Add(panel1);
             Name = "UserControlProducts";
             Size = new Size(1376, 783);
             Load += UserControlProducts_Load;
-            ((System.ComponentModel.ISupportInitialize)ProductosDgv).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)ProductosDgv).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
-
-        private DataGridView ProductosDgv;
         private Panel panel1;
         private FontAwesome.Sharp.IconButton iconButton1;
         private ComboBox comboBox1;
@@ -209,6 +180,6 @@
         private FontAwesome.Sharp.IconButton iconButton3;
         private FontAwesome.Sharp.IconButton btnEliminar;
         private Panel panel2;
-        private FontAwesome.Sharp.IconButton iconButton4;
+        private DataGridView ProductosDgv;
     }
 }
