@@ -74,40 +74,9 @@ namespace dashboard
                 }
             }
         }
-
-        private void panelBoton_Paint(object sender, PaintEventArgs e)
-        {
-        }
-
-        private void panelBoton_MouseEnter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panelBoton_MouseLeave(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panelBoton_Click(object sender, EventArgs e)
-        {
-
-        }
-
-
-        private void iconButton1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void iconButton4_Click(object sender, EventArgs e)
         {
             LimpiarFormulario();
-        }
-
-        private void CatDgv_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
 
         private async void iconButton5_Click(object sender, EventArgs e)
@@ -164,12 +133,7 @@ namespace dashboard
                 MessageBox.Show("Ocurrió un error al guardar: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }    
-
-        private void iconButton3_Click(object sender, EventArgs e)
-        {
-
-        }
-
+             
         private async void iconButton2_Click(object sender, EventArgs e)
         {
             if (CatDgv.SelectedRows.Count > 0)

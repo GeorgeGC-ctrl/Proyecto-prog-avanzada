@@ -48,7 +48,7 @@
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1376, 82);
+            panel1.Size = new Size(1584, 82);
             panel1.TabIndex = 1;
             // 
             // iconButton3
@@ -61,7 +61,7 @@
             iconButton3.IconColor = Color.Black;
             iconButton3.IconFont = FontAwesome.Sharp.IconFont.Auto;
             iconButton3.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButton3.Location = new Point(1123, 18);
+            iconButton3.Location = new Point(1365, 16);
             iconButton3.Name = "iconButton3";
             iconButton3.Size = new Size(216, 54);
             iconButton3.TabIndex = 5;
@@ -87,6 +87,7 @@
             textBox1.PlaceholderText = "Buscar productos";
             textBox1.Size = new Size(304, 31);
             textBox1.TabIndex = 0;
+            textBox1.TextChanged += textBox1_TextChanged;
             // 
             // panel2
             // 
@@ -94,7 +95,7 @@
             panel2.Dock = DockStyle.Fill;
             panel2.Location = new Point(0, 82);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1376, 701);
+            panel2.Size = new Size(1584, 701);
             panel2.TabIndex = 2;
             // 
             // ProductosDgv
@@ -104,7 +105,7 @@
             ProductosDgv.Location = new Point(0, 0);
             ProductosDgv.Name = "ProductosDgv";
             ProductosDgv.RowHeadersWidth = 62;
-            ProductosDgv.Size = new Size(1376, 701);
+            ProductosDgv.Size = new Size(1584, 701);
             ProductosDgv.TabIndex = 0;
             // 
             // UserControlProducts
@@ -114,7 +115,7 @@
             Controls.Add(panel2);
             Controls.Add(panel1);
             Name = "UserControlProducts";
-            Size = new Size(1376, 783);
+            Size = new Size(1584, 783);
             Load += UserControlProducts_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();

@@ -18,10 +18,13 @@ namespace SistemaInventario.Presentacion
 {
     public partial class UserControlProducts : UserControl
     {
+
         private readonly IProductService _productService;
         private readonly ICategoryService _categoryService;
         private readonly ISuppliersService _suppliersService;
-         public UserControlProducts(IProductService productService, ICategoryService categoryService, ISuppliersService suppliersService)
+        private List<ProductsDto> _allProducts = new List<ProductsDto>();
+
+        public UserControlProducts(IProductService productService, ICategoryService categoryService, ISuppliersService suppliersService)
         {
             InitializeComponent();
             this._productService = productService;
@@ -54,7 +57,7 @@ namespace SistemaInventario.Presentacion
                 // Ocultar columnas de ID
                 if (ProductosDgv.Columns["SupplierID"] != null) ProductosDgv.Columns["SupplierID"].Visible = false;
                 if (ProductosDgv.Columns["CategoryID"] != null) ProductosDgv.Columns["CategoryID"].Visible = false;
-                
+
                 // Ocultar la columna de cantidad por unidad (QuantityPerUnit)
                 if (ProductosDgv.Columns["QuantityPerUnit"] != null) ProductosDgv.Columns["QuantityPerUnit"].Visible = false;
 
@@ -92,7 +95,7 @@ namespace SistemaInventario.Presentacion
             }
 
         }
-        
+
         public async void EjecutarEditar(int rowIndex)
         {
             try
@@ -173,7 +176,7 @@ namespace SistemaInventario.Presentacion
 
                 if (respuesta == DialogResult.Yes)
                 {
-                   
+
 
                     MessageBox.Show(
                         "Suplidor eliminado correctamente.",
@@ -194,7 +197,11 @@ namespace SistemaInventario.Presentacion
             }
         }
 
-       
-    }
-}
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+           
+        }
 
+    }
+
+}

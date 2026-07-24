@@ -66,13 +66,11 @@ namespace dashboard
             CatDgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             CatDgv.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             CatDgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            CatDgv.Dock = DockStyle.Fill;
             CatDgv.Location = new Point(0, 0);
             CatDgv.Name = "CatDgv";
             CatDgv.RowHeadersWidth = 62;
-            CatDgv.Size = new Size(882, 861);
+            CatDgv.Size = new Size(974, 369);
             CatDgv.TabIndex = 1;
-            CatDgv.CellContentClick += CatDgv_CellContentClick;
             // 
             // panel1
             // 
@@ -81,7 +79,7 @@ namespace dashboard
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1459, 76);
+            panel1.Size = new Size(1636, 76);
             panel1.TabIndex = 2;
             // 
             // textBox1
@@ -105,7 +103,7 @@ namespace dashboard
             btnNuevaCategoria.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnNuevaCategoria.IconSize = 20;
             btnNuevaCategoria.ImageAlign = ContentAlignment.MiddleLeft;
-            btnNuevaCategoria.Location = new Point(650, 15);
+            btnNuevaCategoria.Location = new Point(1385, 15);
             btnNuevaCategoria.Name = "btnNuevaCategoria";
             btnNuevaCategoria.Size = new Size(210, 46);
             btnNuevaCategoria.TabIndex = 1;
@@ -118,33 +116,30 @@ namespace dashboard
             // panel2
             // 
             panel2.Controls.Add(CatDgv);
-            panel2.Dock = DockStyle.Left;
             panel2.Location = new Point(0, 76);
             panel2.Name = "panel2";
-            panel2.Size = new Size(882, 861);
+            panel2.Size = new Size(977, 861);
             panel2.TabIndex = 3;
             // 
             // panel3
             // 
             panel3.BackColor = Color.White;
             panel3.Controls.Add(panel4);
-            panel3.Location = new Point(923, 82);
+            panel3.Location = new Point(1045, 76);
             panel3.Name = "panel3";
-            panel3.Size = new Size(648, 524);
+            panel3.Size = new Size(550, 524);
             panel3.TabIndex = 4;
             // 
             // panel4
             // 
             panel4.BackColor = Color.White;
-            panel4.BorderStyle = BorderStyle.Fixed3D;
             panel4.Controls.Add(iconButton5);
             panel4.Controls.Add(iconButton4);
             panel4.Controls.Add(panel6);
             panel4.Controls.Add(panel7);
-            panel4.Dock = DockStyle.Top;
             panel4.Location = new Point(0, 0);
             panel4.Name = "panel4";
-            panel4.Size = new Size(648, 524);
+            panel4.Size = new Size(550, 524);
             panel4.TabIndex = 1;
             // 
             // iconButton5
@@ -161,7 +156,7 @@ namespace dashboard
             iconButton5.Location = new Point(323, 456);
             iconButton5.Name = "iconButton5";
             iconButton5.Padding = new Padding(5, 0, 10, 0);
-            iconButton5.Size = new Size(155, 52);
+            iconButton5.Size = new Size(183, 52);
             iconButton5.TabIndex = 8;
             iconButton5.Text = "Guardar";
             iconButton5.TextAlign = ContentAlignment.MiddleLeft;
@@ -200,10 +195,9 @@ namespace dashboard
             panel6.Controls.Add(txtNombre);
             panel6.Controls.Add(label3);
             panel6.Controls.Add(label2);
-            panel6.Dock = DockStyle.Top;
             panel6.Location = new Point(0, 84);
             panel6.Name = "panel6";
-            panel6.Size = new Size(644, 357);
+            panel6.Size = new Size(550, 357);
             panel6.TabIndex = 1;
             // 
             // panelProductosAsociados
@@ -211,7 +205,7 @@ namespace dashboard
             panelProductosAsociados.BackColor = Color.FromArgb(243, 244, 246);
             panelProductosAsociados.Controls.Add(lblProdAsocTexto);
             panelProductosAsociados.Controls.Add(lblProdAsocBadge);
-            panelProductosAsociados.Location = new Point(3, 30);
+            panelProductosAsociados.Location = new Point(24, 28);
             panelProductosAsociados.Name = "panelProductosAsociados";
             panelProductosAsociados.Size = new Size(503, 40);
             panelProductosAsociados.TabIndex = 10;
@@ -246,7 +240,7 @@ namespace dashboard
             lblCharCount.AutoSize = true;
             lblCharCount.Font = new Font("Segoe UI", 7.5F);
             lblCharCount.ForeColor = SystemColors.ControlDark;
-            lblCharCount.Location = new Point(450, 275);
+            lblCharCount.Location = new Point(367, 280);
             lblCharCount.Name = "lblCharCount";
             lblCharCount.Size = new Size(47, 20);
             lblCharCount.TabIndex = 11;
@@ -255,7 +249,7 @@ namespace dashboard
             // txtDescripcion
             // 
             txtDescripcion.BorderStyle = BorderStyle.FixedSingle;
-            txtDescripcion.Location = new Point(3, 185);
+            txtDescripcion.Location = new Point(24, 190);
             txtDescripcion.Multiline = true;
             txtDescripcion.Name = "txtDescripcion";
             txtDescripcion.Size = new Size(503, 120);
@@ -267,7 +261,7 @@ namespace dashboard
             label4.BackColor = Color.Transparent;
             label4.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold);
             label4.ForeColor = SystemColors.ControlDarkDark;
-            label4.Location = new Point(3, 160);
+            label4.Location = new Point(24, 165);
             label4.Name = "label4";
             label4.Size = new Size(96, 21);
             label4.TabIndex = 8;
@@ -276,7 +270,7 @@ namespace dashboard
             // txtNombre
             // 
             txtNombre.BorderStyle = BorderStyle.FixedSingle;
-            txtNombre.Location = new Point(3, 110);
+            txtNombre.Location = new Point(24, 115);
             txtNombre.Name = "txtNombre";
             txtNombre.Size = new Size(432, 31);
             txtNombre.TabIndex = 7;
@@ -287,7 +281,7 @@ namespace dashboard
             label3.BackColor = Color.Transparent;
             label3.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold);
             label3.ForeColor = SystemColors.ControlDarkDark;
-            label3.Location = new Point(3, 85);
+            label3.Location = new Point(24, 90);
             label3.Name = "label3";
             label3.Size = new Size(71, 21);
             label3.TabIndex = 6;
@@ -299,7 +293,7 @@ namespace dashboard
             label2.BackColor = Color.Transparent;
             label2.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold);
             label2.ForeColor = SystemColors.ControlDark;
-            label2.Location = new Point(3, 5);
+            label2.Location = new Point(24, 3);
             label2.Name = "label2";
             label2.Size = new Size(148, 21);
             label2.TabIndex = 5;
@@ -313,7 +307,7 @@ namespace dashboard
             panel7.Dock = DockStyle.Top;
             panel7.Location = new Point(0, 0);
             panel7.Name = "panel7";
-            panel7.Size = new Size(644, 84);
+            panel7.Size = new Size(550, 84);
             panel7.TabIndex = 0;
             // 
             // label1
@@ -350,7 +344,7 @@ namespace dashboard
             Controls.Add(panel2);
             Controls.Add(panel1);
             Name = "UserControlCategories";
-            Size = new Size(1459, 937);
+            Size = new Size(1636, 937);
             Load += Categories_Load;
             ((System.ComponentModel.ISupportInitialize)CatDgv).EndInit();
             panel1.ResumeLayout(false);

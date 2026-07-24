@@ -3,6 +3,7 @@ using Northwind.Entidades.DTOs;
 using SistemaInventario.AccesoDatos;
 using SistemaInventario.Entidades;
 using System.Data;
+using static Northwind.LogicaNegocios.Categorias.CreateCategoryValidator;
 
 namespace Northwind.LogicaNegocios.Categorias
 {
@@ -11,11 +12,14 @@ namespace Northwind.LogicaNegocios.Categorias
         
         private readonly IUnitOfWork unitOfWork1;
         private readonly IValidator<CreateCategoryDto> _createCategoryValidator;
+        private readonly IValidator<int> _deleteCategoryIdValidator;
 
-        public CategoryService(IUnitOfWork unitOfWork, IValidator<CreateCategoryDto> createCategoryValidator)
+        public CategoryService(IUnitOfWork unitOfWork, IValidator<CreateCategoryDto> createCategoryValidator, IValidator<int> deleteCategoryIdValidator)
         {
-           unitOfWork1 = unitOfWork;
-           _createCategoryValidator = createCategoryValidator;
+            unitOfWork1 = unitOfWork;
+            _createCategoryValidator = createCategoryValidator;
+            _deleteCategoryIdValidator = deleteCategoryIdValidator;
+
         }
         public async Task<IReadOnlyList<CategoryDto>> GetAllCategoriesAsync()
         {
@@ -102,6 +106,10 @@ namespace Northwind.LogicaNegocios.Categorias
             {
                 throw new Exception($"Categoría con ID {id} no encontrada.");
             }
+            var validationResult = await _deleteCategoryIdValidator.ValidateAsync(id);
+            if (!validationResult.IsValid)
+                throw new ValidationException(validationResult.Errors);
+    
             await unitOfWork1.Categorias.DeleteAsync(id);
             await unitOfWork1.SaveChangesAsync();
             

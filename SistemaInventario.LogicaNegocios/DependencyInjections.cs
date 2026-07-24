@@ -1,11 +1,12 @@
+using FluentValidation;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Northwind.AccesoDatos;
-using FluentValidation;
 using Northwind.LogicaNegocios.Categorias;
+using Northwind.LogicaNegocios.Ordenes;
 using Northwind.LogicaNegocios.Productos;
 using Northwind.LogicaNegocios.Suplidores;
-using Northwind.LogicaNegocios.Ordenes;
+using static Northwind.LogicaNegocios.Categorias.CreateCategoryValidator;
 
 namespace Northwind.LogicaNegocios
 {
@@ -22,6 +23,7 @@ namespace Northwind.LogicaNegocios
             services.AddValidatorsFromAssemblyContaining<CreateProductValidator>();
             services.AddValidatorsFromAssemblyContaining<SuppliersValidator>();
             services.AddValidatorsFromAssemblyContaining<OrderValidator>();
+            services.AddValidatorsFromAssemblyContaining<DeleteCategoryValidator>();
 
 
             return services;

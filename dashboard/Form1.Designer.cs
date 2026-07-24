@@ -82,8 +82,6 @@ namespace dashboard
             nav.Padding = new Padding(10, 8, 10, 8);
             nav.Size = new Size(300, 839);
             nav.TabIndex = 1;
-            nav.Paint += nav_Paint;
-            nav.MouseEnter += nav_MouseEnter;
             // 
             // label2
             // 
@@ -261,6 +259,7 @@ namespace dashboard
             // 
             // conteinerPanel
             // 
+            conteinerPanel.AutoScroll = true;
             conteinerPanel.Dock = DockStyle.Fill;
             conteinerPanel.Location = new Point(0, 56);
             conteinerPanel.Name = "conteinerPanel";

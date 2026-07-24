@@ -130,6 +130,13 @@ namespace Northwind.LogicaNegocios.Suplidores
             {
                 throw new Exception($"Suplidor con ID {id} no encontrado.");
             }
+            var productos = await _unitOfWork.Productos.GetAllAsync();
+            bool tieneProductos = productos.Any(p => p.SupplierID == id);
+            if (tieneProductos)
+            {
+                throw new InvalidOperationException(
+                    $"No se puede eliminar el suplidor '{existingSupplier.CompanyName}' porque tiene productos asociados.");
+            }
             await _unitOfWork.Suplidores.DeleteAsync(id);
             await _unitOfWork.SaveChangesAsync();
 

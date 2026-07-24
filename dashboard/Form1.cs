@@ -26,47 +26,9 @@ namespace dashboard
             this._orderService = orderService;
         }
 
-        private async void Form1_Load1(object? sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
-            var userControl = new ucDashboard();
-            userControl.Show();
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void clientesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void gestionarCategortToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-        }
-
-        private async void Form1_Load(object sender, EventArgs e)
-        {
-            // Cargar el ucDashboard al inicio
-            var dashboard = new ucDashboard();
-            dashboard.Dock = DockStyle.Fill;
-            conteinerPanel.Controls.Add(dashboard);
-        }
-
-        private void nav_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void nav_MouseEnter(object sender, EventArgs e)
-        {
-
+            MostrarDashboard();
         }
 
         private void btnDashboard_MouseEnter(object sender, EventArgs e)
@@ -109,6 +71,7 @@ namespace dashboard
         private void btnSuplidores_Click(object sender, EventArgs e)
         {
             conteinerPanel.Controls.Clear();
+            conteinerPanel.AutoScroll = false;
             var userControl = new UserControlSuplidores(_suppliersService);
             userControl.Dock = DockStyle.Fill;
             conteinerPanel.Controls.Add(userControl);
@@ -144,34 +107,19 @@ namespace dashboard
             e.Graphics.DrawLine(pen, 0, panelTopBar.Height - 1, panelTopBar.Width, panelTopBar.Height - 1);
         }
 
-        private void panel1_Paint_1(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private void btnDashboard_Click(object sender, EventArgs e)
         {
-            conteinerPanel.Controls.Clear();
-            var userControl = new ucDashboard();
-            userControl.Dock = DockStyle.Fill;
-            conteinerPanel.Controls.Add(userControl);
-
+            MostrarDashboard();
         }
 
         private void btnProduct_Click(object sender, EventArgs e)
         {
-            conteinerPanel.Controls.Clear();
-            var userControl = new UserControlProducts(_productService, _categoriaService, _suppliersService);
-            userControl.Dock = DockStyle.Fill;
-            conteinerPanel.Controls.Add(userControl);
+            MostrarProductos();
         }
 
         private void btnCategories_Click(object sender, EventArgs e)
         {
-            conteinerPanel.Controls.Clear();
-            var Categorias = new UserControlCategories(_categoriaService, _productService);
-            Categorias.Dock = DockStyle.Fill;
-            conteinerPanel.Controls.Add(Categorias);
+            MostrarCategorias();
 
         }
 
@@ -182,15 +130,75 @@ namespace dashboard
 
         private void btnPapelera_Click(object sender, EventArgs e)
         {
+            MostrarOrdenes();
+        }
+
+        private void MostrarDashboard()
+        {
             conteinerPanel.Controls.Clear();
-            var userControl = new UserControlGestionOrdenes(_orderService, _productService);
-            userControl.Dock = DockStyle.Fill;
+            conteinerPanel.AutoScroll = true;
+            var dashboard = new ucDashboard(_productService, _categoriaService, _suppliersService, NavegarDesdeDashboard)
+            {
+                Dock = DockStyle.Top,
+                AutoSize = true,
+                AutoSizeMode = AutoSizeMode.GrowAndShrink
+            };
+            conteinerPanel.Controls.Add(dashboard);
+        }
+
+        private void MostrarProductos()
+        {
+            conteinerPanel.Controls.Clear();
+            conteinerPanel.AutoScroll = false;
+            var userControl = new UserControlProducts(_productService, _categoriaService, _suppliersService) { Dock = DockStyle.Fill };
             conteinerPanel.Controls.Add(userControl);
         }
 
-        private async void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void MostrarCategorias()
         {
-            
+            conteinerPanel.Controls.Clear();
+            conteinerPanel.AutoScroll = false;
+            conteinerPanel.Controls.Add(new UserControlCategories(_categoriaService, _productService) { Dock = DockStyle.Fill });
         }
+
+        private void MostrarOrdenes()
+        {
+            conteinerPanel.Controls.Clear();
+            conteinerPanel.AutoScroll = false;
+            conteinerPanel.Controls.Add(new UserControlGestionOrdenes(_orderService, _productService) { Dock = DockStyle.Fill });
+        }
+
+        private void MostrarPapelera()
+        {
+            conteinerPanel.Controls.Clear();
+            conteinerPanel.AutoScroll = false;
+            conteinerPanel.Controls.Add(new UserControlPapelera { Dock = DockStyle.Fill });
+        }
+
+        private void NavegarDesdeDashboard(DashboardAction action)
+        {
+            switch (action)
+            {
+                case DashboardAction.Products:
+                    MostrarProductos();
+                    break;
+                case DashboardAction.NewProduct:
+                    MostrarProductos();
+                    using (var form = new Form2(_productService, _categoriaService, _suppliersService)) form.ShowDialog(this);
+                    break;
+                case DashboardAction.NewOrder:
+                    MostrarOrdenes();
+                    using (var form = new FormOrder(_orderService, _productService)) form.ShowDialog(this);
+                    break;
+                case DashboardAction.NewCategory:
+                    MostrarCategorias();
+                    break;
+                case DashboardAction.Trash:
+                    MostrarPapelera();
+                    break;
+            }
+        }
+
+      
     }
 }
